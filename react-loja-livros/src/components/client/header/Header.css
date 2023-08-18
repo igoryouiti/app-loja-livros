@@ -1,0 +1,45 @@
+.client-header{
+    border: 0.1rem solid blue;
+    height: 5.2rem;
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    padding: .8rem;
+}
+
+.client-header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: aqua;
+
+}
+
+.client-header-logo{
+}
+
+.client-header-search-box{
+
+}
+
+.client-header-search-form{
+    display: flex;
+}
+
+.client-header-search-form-input{
+    height: 1.8rem;
+}
+
+.client-header-search-form-button{
+    height: 1.8rem;
+    margin-left: .4rem;
+}
+
+.client-header-carrinho{
+
+
+}
+
+.client-header-user{
+}

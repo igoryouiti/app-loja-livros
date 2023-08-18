@@ -1,0 +1,15 @@
+.card-shelf-container{
+    width: min-content;
+    margin: 0.8rem;
+    padding: 1.6rem;
+    border: solid black;
+}
+
+.shelf-image{   
+    height: 170px;
+    width: 170px;
+}
+
+.card-shelf-name{
+    font-size: 1.6rem;
+}
