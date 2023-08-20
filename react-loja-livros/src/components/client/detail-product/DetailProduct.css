@@ -1,0 +1,106 @@
+.detail-product-container{
+    justify-content: center;
+    align-items: center;
+
+}
+
+.detail-product{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 3.2rem;
+}
+
+.detail-product-image{
+    padding: 3.2rem;
+}
+
+.product-image{
+
+}
+
+.detail-product-buy{
+
+}
+
+.detail-product-to-chart{
+    display: flex;
+    align-items: center;
+}
+
+.product-price{
+
+}
+
+.quantity-product{
+    display: flex;
+    align-items: center;
+}
+
+.quantity-product button{
+    width: 1.6rem;
+    height: 1.6rems;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1.6rem;
+}
+
+.minus-btn{
+
+}
+
+.quantity{
+
+}
+
+.quantity-input{
+    width: 3.6rem;
+}
+
+.plus-btn{
+
+}
+
+.add-to-chart{
+
+}
+
+.detail-product-description{
+    margin: 1.6rem;
+    padding: 0.8rem;
+    text-align: center; 
+}
+
+.detail-product-description h3{
+    padding: 0.8rem;
+    text-align: center; 
+}
+
+.detail-product-specification{
+    margin: 1.6rem;
+    padding: 0.8rem;
+}
+
+.detail-product-specification h3{
+    padding: 0.8rem;
+}
+.list-specification{
+
+}
+
+.item{
+    display: flex;
+    text-align: left;
+}
+
+.specification{
+    padding: 0.8rem;
+    width: 16rem;
+}
+
+.specification-data{
+    align-items: right;
+    justify-content: right;
+    padding: 0.8rem;
+}
