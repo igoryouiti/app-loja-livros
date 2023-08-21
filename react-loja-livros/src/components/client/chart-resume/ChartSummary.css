@@ -1,0 +1,150 @@
+.chart-summary-content{
+
+}
+
+.chart-items-list{
+
+}
+
+.chart-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid;
+    margin: 1.6rem;
+    padding: 0.8rem;
+
+}
+
+.image-chart-item{
+    height: 6.4rem;
+    width: 6.4rem;
+}
+
+.name-chart-item{
+
+}
+
+.price-chart-item{
+
+}
+.quantity-chart-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.quantity-chart-item button{
+    width: 1.6rem;
+    height: 1.6rems;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1.6rem;
+}
+
+.minus-quantity-chart-item{
+
+}
+
+.input-quantity-chart-item{
+    width: 4.6rem;
+}
+
+.plus-quantity-chart-item{
+      
+}
+
+.total-chart-item{
+
+}
+
+.btn-remove-chart-item{
+
+}
+
+.chart-options{
+    display: flex;
+    justify-content: space-around;
+}
+
+.freight-chart-options{
+    display: flex;
+    
+}
+
+.freight-calc-chart-option{
+
+}
+
+.cep-calc-chart-option{
+
+}
+
+.btn-calc-chart-option{
+
+}
+
+.summary-freight-calc{
+
+}
+
+.estimated-time-chart-option{
+
+}
+
+.price-freight-chart-option{
+
+}
+
+.summary-chart-option{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.summary-chart{
+
+}
+
+.sub-total{
+
+}
+
+.freight-price{
+
+}
+
+.promo-coupons-chart{
+    display: flex;
+
+}
+
+.coupons-chart{
+
+}
+
+.btn-plus-coupon{
+
+}
+
+.trade-coupons-chart{
+    display: flex;
+}
+
+.trade-coupons{
+
+}
+
+.btn-plus-coupon{
+
+}
+
+.total-price-itens{
+
+}
+
+.btn-buy{
+
+}

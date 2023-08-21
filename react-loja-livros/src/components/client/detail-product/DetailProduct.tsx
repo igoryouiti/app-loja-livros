@@ -10,7 +10,7 @@ export default class DetailProduct extends Component {
             <img className='product-image' src="https://lojasaraivanew.vtexassets.com/arquivos/ids/159014-800-auto?v=638000884796000000&width=800&height=auto&aspect=true"
               alt="Duas mãos estão quase alcançando o calice de fogo" />
           </div>
-          <form className="detail-product-buy">
+          <form className="detail-product-buy" action='/chart'>
             <div className="product-name">Harry Potter</div>
             <div className="detail-product-to-chart">
               <div className="product-price">R$99,99</div>
