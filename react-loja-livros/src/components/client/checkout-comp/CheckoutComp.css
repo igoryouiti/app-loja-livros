@@ -1,0 +1,22 @@
+.checkout-container{
+    display: flex;
+    font-size: 12px;
+}
+
+.checkout-container input{
+    border: 0.1rem solid;
+}
+
+.checkout-billing-main{
+    
+}
+
+.checkout-billing-main div{
+    display: flex;
+    align-items: center;
+}
+
+.checkout-shipping-main div {
+    display: flex;
+    align-items: center;
+}

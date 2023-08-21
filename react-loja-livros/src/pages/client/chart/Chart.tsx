@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Chart.css'
 
-import ChartSummary from '../../../components/client/chart-resume/ChartSummary'
+import ChartSummary from '../../../components/client/chart-summary/ChartSummary'
 
 export default class Chart extends Component {
   render() {
