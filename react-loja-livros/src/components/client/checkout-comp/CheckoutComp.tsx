@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './CheckoutComp.css'
+import { Link } from 'react-router-dom'
 
 export default class CheckoutComp extends Component {
   render() {
@@ -258,7 +259,9 @@ export default class CheckoutComp extends Component {
               <div className="amount-total">91,48</div>
               <div className="installments">1 x 91,48</div>
             </div>
-            <div className="btn-buy">Finalizar Compra btn</div>
+            <Link to="/dashboard">
+               <button className="btn-buy">Comprar</button>
+            </Link>
           </div>
         </div>
       </>

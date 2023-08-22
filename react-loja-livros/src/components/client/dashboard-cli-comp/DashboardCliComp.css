@@ -1,0 +1,26 @@
+.dashboard-container{
+
+}
+
+.transaction-list-container{
+}
+
+.header-list{
+    display: flex;
+    width: 48rem;
+}
+
+.header-list div{
+    justify-content: space-around;
+    width: 48rem;
+}
+
+.item-list{
+    display: flex;
+    width: 48rem;
+}
+
+.item-list div{
+    justify-content: space-around;
+    width: 48rem;
+}
