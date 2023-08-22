@@ -23,7 +23,7 @@ export default class DetailedTransaction extends Component {
                 <input type="text" className="input-quantity-chart-item" placeholder="1" name="quantity" />
                 <button className="plus-quantity-chart-item">+</button>
               </div>
-              <div>ENTREGUE</div>
+              <div>EM PROCESSAMENTO</div>
               <button  onClick={myFunction}>Troca</button>
             </div>
           </div>
