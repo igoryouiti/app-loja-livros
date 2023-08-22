@@ -139,7 +139,7 @@ export default class CheckoutComp extends Component {
               </div>
             </div>
             <div className="checkout-shipping-new">
-            <div>
+              <div>
                 <label htmlFor="typeResidence">Tipo Residência: </label>
                 <input type='text' id='typeResidence' name='typeResidence'/>
               </div>
