@@ -4,9 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_credit_card")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreditCard {
 
     @Id
@@ -34,8 +42,8 @@ public class CreditCard {
     private CreditCardBrand creditCardBrand;
 
     @ManyToOne
-    @JoinColumn(name = "fk_client_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties("creditCards")
-    private Client client;
+    private Customer customer;
 
 }

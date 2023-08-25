@@ -4,13 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_clients")
-public class Client {
+@Table(name = "tb_customers")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,27 +37,26 @@ public class Client {
     @NotBlank
     private String cpf;
 
-    @OneToOne(mappedBy = "client")
+    @OneToOne(mappedBy = "customer")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_residential_address_id", referencedColumnName = "id")
-    private ResidentialAddress residentialAddress;
+    @OneToOne(mappedBy = "customer")
+    private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_telephone_id", referencedColumnName = "id")
+
+    @OneToOne(mappedBy = "customer")
     private Telephone telephone;
 
-    @OneToMany (mappedBy = "client", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties(value = "client")
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "customer")
     private List<BillingAddress> billingAddresses;
 
-    @OneToMany (mappedBy = "client", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties(value = "client")
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "customer")
     private List<ShippingAddress> shippingAddresses;
 
-    @OneToMany (mappedBy = "client", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties(value = "client")
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "customer")
     private List<CreditCard> creditCards;
 
 }
