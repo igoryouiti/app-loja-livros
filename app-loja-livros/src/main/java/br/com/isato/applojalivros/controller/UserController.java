@@ -32,7 +32,6 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id){
-
             return userService.findById(id)
                     .map(response -> ResponseEntity.ok(response))
                     .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -41,7 +40,6 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<User> post (@RequestBody CreateUserDTO createUserDTO){
-
             return userService.create(createUserDTO)
                     .map(response -> ResponseEntity.ok(response))
                     .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -58,24 +56,21 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        try {
-            userService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }catch (Exception e){
-            throw e;
-        }
+        userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/active/{id}")
     public ResponseEntity active(@PathVariable Long id) {
-            userService.activateUser(id);
-            return ResponseEntity.noContent().build();
+        return userService.activateUser(id)
+                .map(response -> ResponseEntity.ok(response))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/inactive/{id}")
     public ResponseEntity inactive(@PathVariable Long id) {
-
-            userService.inactivateUser(id);
-            return ResponseEntity.noContent().build();
+        return userService.inactivateUser(id)
+                .map(response -> ResponseEntity.ok(response))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

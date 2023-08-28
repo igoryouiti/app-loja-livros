@@ -119,7 +119,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void inactivateUser(Long id){
+    public Optional<User> inactivateUser(Long id){
         if(id == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
@@ -132,10 +132,10 @@ public class UserService {
 
         user.get().setActive(false);
 
-        userRepository.save(user.get());
+        return Optional.of(userRepository.save(user.get()));
     }
 
-    public void activateUser(Long id){
+    public Optional<User> activateUser(Long id){
         if(id == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
@@ -148,7 +148,7 @@ public class UserService {
 
         user.get().setActive(true);
 
-        userRepository.save(user.get());
+        return Optional.of(userRepository.save(user.get()));
     }
 
     private String cryptographyPassword (String password) {
