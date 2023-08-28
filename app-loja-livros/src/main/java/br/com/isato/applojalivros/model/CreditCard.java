@@ -38,6 +38,9 @@ public class CreditCard {
     @NotBlank
     private String cvv;
 
+    @NotBlank
+    private Boolean favorite;
+
     @Enumerated(EnumType.STRING)
     private CreditCardBrand creditCardBrand;
 
