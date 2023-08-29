@@ -37,8 +37,8 @@ public class CustomerController {
     private CreditCardService creditCardService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<List<Customer>> getAll(){
+        return ResponseEntity.ok(customerService.findAll());
     }
 
     @GetMapping("/{id}")
@@ -49,8 +49,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> post (@RequestBody CreateCustomerDTO createCustomerDTO){
-        return customerService.create(createCustomerDTO)
+    public ResponseEntity<Customer> post (@RequestBody CreateCustomerDTO customer){
+        return customerService.create(customer)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
@@ -64,7 +64,7 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        userService.deleteById(id);
+        customerService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -90,7 +90,7 @@ public class CustomerController {
 
     @DeleteMapping("/address/{id}")
     public ResponseEntity deleteAddress(@PathVariable Long id) {
-        userService.deleteById(id);
+        addressService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -121,7 +121,7 @@ public class CustomerController {
 
     @DeleteMapping("/billing-addresses/{id}")
     public ResponseEntity deleteBillingAddress(@PathVariable Long id) {
-        userService.deleteById(id);
+        billingAddressService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -152,7 +152,7 @@ public class CustomerController {
 
     @DeleteMapping("/shipping-addresses/{id}")
     public ResponseEntity deleteShippingAddress(@PathVariable Long id) {
-        userService.deleteById(id);
+        shippingAddressService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -182,7 +182,7 @@ public class CustomerController {
 
     @DeleteMapping("/credit-card/{id}")
     public ResponseEntity deleteCreditCard(@PathVariable Long id) {
-        userService.deleteById(id);
+        creditCardService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -214,7 +214,7 @@ public class CustomerController {
 
     @DeleteMapping("/telephone/{id}")
     public ResponseEntity deleteTelephone(@PathVariable Long id) {
-        userService.deleteById(id);
+        telephoneService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 

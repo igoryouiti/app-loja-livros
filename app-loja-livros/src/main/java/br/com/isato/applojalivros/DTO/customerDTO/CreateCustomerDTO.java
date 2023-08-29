@@ -27,7 +27,7 @@ public class CreateCustomerDTO {
     @NotBlank
     private String gender;
 
-    @NotBlank
+    @NotNull
     private LocalDate birthday;
 
     @NotBlank
@@ -44,11 +44,11 @@ public class CreateCustomerDTO {
     private Telephone telephone;
 
     @NotNull
-    private BillingAddress billingAddress;
+    private BillingAddress billingAddresses;
 
     @NotNull
-    private ShippingAddress shippingAddress;
+    private ShippingAddress shippingAddresses;
 
     @NotNull
-    private CreditCard creditCard;
+    private CreditCard creditCards;
 }

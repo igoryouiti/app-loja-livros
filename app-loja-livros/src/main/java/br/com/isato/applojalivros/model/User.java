@@ -2,6 +2,7 @@ package br.com.isato.applojalivros.model;
 
 import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
 import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -36,6 +37,7 @@ public class User {
 
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnoreProperties(value = "customer")
     private Customer customer;
 
 

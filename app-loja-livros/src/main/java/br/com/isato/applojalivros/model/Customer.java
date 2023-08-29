@@ -6,6 +6,7 @@ import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class Customer {
     @NotBlank
     private String gender;
 
-    @NotBlank
+    @NotNull
     private LocalDate birthday;
 
     @NotBlank
@@ -44,12 +45,15 @@ public class Customer {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = "customer")
     private User user;
 
     @OneToOne(mappedBy = "customer")
+    @JsonIgnoreProperties(value = "customer")
     private Address address;
 
     @OneToOne(mappedBy = "customer")
+    @JsonIgnoreProperties(value = "customer")
     private Telephone telephone;
 
     @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)

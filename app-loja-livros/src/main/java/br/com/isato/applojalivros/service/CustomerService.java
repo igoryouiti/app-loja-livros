@@ -7,6 +7,7 @@ import br.com.isato.applojalivros.business.validator.ValidadorCpf;
 import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -48,18 +49,19 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
     @Transactional(rollbackOn = Exception.class)
-    public Optional<Customer> create(CreateCustomerDTO createCustomerDTO){
+    public Optional<Customer> create(@Valid CreateCustomerDTO createCustomerDTO){
 
         if(createCustomerDTO.getUser().getId() == null || createCustomerDTO.getUser().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O Objeto User deve ter um id");
 
-        if(userService.findById(createCustomerDTO.getUser().getId()).isEmpty())
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "O Objeto User deve ter um id válido");
+        createCustomerDTO.setUser(userService.findById(createCustomerDTO.getUser().getId()).get());
+
+
 
         validator = new ValidadorCpf();
-        if(validator.validate(createCustomerDTO.getCpf()))
+        System.out.println(createCustomerDTO.getCpf());
+        if(!validator.validate(createCustomerDTO.getCpf()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve conter um CPF válido");
 
@@ -67,30 +69,30 @@ public class CustomerService {
 
         Optional<Customer> optCreatedCustomer = Optional.of(customerRepository.save(customer));
 
-        createCustomerDTO.getAddress().getCustomer().setId(optCreatedCustomer.get().getId());
+        createCustomerDTO.getAddress().setCustomer(optCreatedCustomer.get());
         if(addressService.create(createCustomerDTO.getAddress()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de endereço residencial");
 
 
-        createCustomerDTO.getBillingAddress().getCustomer().setId(optCreatedCustomer.get().getId());
-        if(billingAddressService.create(createCustomerDTO.getBillingAddress()).isEmpty())
+        createCustomerDTO.getBillingAddresses().setCustomer(optCreatedCustomer.get());
+        if(billingAddressService.create(createCustomerDTO.getBillingAddresses()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de endereço de cobrança");
 
-        createCustomerDTO.getShippingAddress().getCustomer().setId(optCreatedCustomer.get().getId());
-        if(shippingAddressService.create(createCustomerDTO.getShippingAddress()).isEmpty())
+        createCustomerDTO.getShippingAddresses().setCustomer(optCreatedCustomer.get());
+        if(shippingAddressService.create(createCustomerDTO.getShippingAddresses()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de endereço de entrega");
 
-        createCustomerDTO.getTelephone().getCustomer().setId(optCreatedCustomer.get().getId());
+        createCustomerDTO.getTelephone().setCustomer(optCreatedCustomer.get());
         if(telephoneService.create(createCustomerDTO.getTelephone()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de endereço de cobrança");
 
 
-        createCustomerDTO.getCreditCard().getCustomer().setId(optCreatedCustomer.get().getId());
-        if(creditCardService.create(createCustomerDTO.getCreditCard()).isEmpty())
+        createCustomerDTO.getCreditCards().setCustomer(optCreatedCustomer.get());
+        if(creditCardService.create(createCustomerDTO.getCreditCards()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de cartao de credito");
 

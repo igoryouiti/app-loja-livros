@@ -24,24 +24,24 @@ public class CreditCard {
 
     @NotBlank
     @Size(max = 64, message = "O nome do portador do cartão deve ter no máximo 64 caracteres")
-    private String holder_name;
+    private String holderName;
 
     @NotNull
-    private Integer exp_month;
+    private Integer expMonth;
 
     @NotNull
-    private Integer exp_year;
+    private Integer expYear;
 
     @NotBlank
     @Size(min = 13, max = 19, message = "O número do cartão deve conter de 13 a 19 digitos")
-    private String card_number;
+    private String cardNumber;
 
     @NotBlank
     @Size(min = 3, max = 4, message = "O cvv deve conter de 3 a 4 digitos")
     private String cvv;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    @NotNull
     private CreditCardBrand creditCardBrand;
 
     @ManyToOne

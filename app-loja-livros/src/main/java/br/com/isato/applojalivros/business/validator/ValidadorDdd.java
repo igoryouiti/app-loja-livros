@@ -8,9 +8,10 @@ public class ValidadorDdd implements IValidator{
     public Boolean validate(Object obj) {
         String ddd = (String) obj;
 
-        Pattern pattern = Pattern.compile("^\\d{2}$");
+        String regex = "^[0-9]{2}$"; // Regex para duas letras numéricas
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(ddd);
-
         return matcher.matches();
+
     }
 }

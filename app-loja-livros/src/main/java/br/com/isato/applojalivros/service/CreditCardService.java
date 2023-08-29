@@ -54,12 +54,12 @@ public class CreditCardService {
                     "Deve conter id do Customer");
 
         validator = new ValidadorCardNumber();
-        if(validator.validate(creditCard.getCard_number()))
+        if(!validator.validate(creditCard.getCardNumber()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O número do cartão deve conter de 13 a 19 numeros");
 
         validator = new ValidadorCvv();
-        if(validator.validate(creditCard.getCard_number()))
+        if(!validator.validate(creditCard.getCvv()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O cvv do cartão deve conter de 3 a 4 numeros");
 
@@ -77,12 +77,12 @@ public class CreditCardService {
                     "Deve conter id do Customer");
 
         validator = new ValidadorCardNumber();
-        if(validator.validate(creditCard.getCard_number()))
+        if(!validator.validate(creditCard.getCardNumber()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O número do cartão deve conter de 13 a 19 numeros");
 
         validator = new ValidadorCvv();
-        if(validator.validate(creditCard.getCard_number()))
+        if(!validator.validate(creditCard.getCardNumber()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O cvv do cartão deve conter de 3 a 4 numeros");
 

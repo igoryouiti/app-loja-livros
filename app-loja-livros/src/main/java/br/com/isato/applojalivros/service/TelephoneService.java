@@ -55,12 +55,13 @@ public class TelephoneService {
                     "Deve conter id do Customer");
 
         validador = new ValidadorDdd();
-        if(validador.validate(telephone.getDdd()))
+        System.out.println(telephone.getDdd());
+        if(!validador.validate(telephone.getDdd()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                 "DDD é uma String com 2 numeros");
 
         validador = new ValidadorTelephone();
-        if(validador.validate(telephone.getNumber()))
+        if(!validador.validate(telephone.getNumber()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O numero deve ser uma String com 8 a 9 numeros");
 
@@ -90,7 +91,7 @@ public class TelephoneService {
         return Optional.of(telephoneRepository.save(telephone));
     }
 
-    public void delete(Long id){
+    public void deleteById(Long id){
         if(id == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
