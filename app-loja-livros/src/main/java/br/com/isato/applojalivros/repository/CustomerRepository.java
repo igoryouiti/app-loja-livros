@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.repository;
 
+
 import br.com.isato.applojalivros.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;

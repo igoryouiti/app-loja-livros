@@ -3,6 +3,7 @@ package br.com.isato.applojalivros.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,10 +26,10 @@ public class CreditCard {
     @Size(max = 64, message = "O nome do portador do cartão deve ter no máximo 64 caracteres")
     private String holder_name;
 
-    @NotBlank
+    @NotNull
     private Integer exp_month;
 
-    @NotBlank
+    @NotNull
     private Integer exp_year;
 
     @NotBlank
@@ -36,12 +37,11 @@ public class CreditCard {
     private String card_number;
 
     @NotBlank
+    @Size(min = 3, max = 4, message = "O cvv deve conter de 3 a 4 digitos")
     private String cvv;
 
-    @NotBlank
-    private Boolean favorite;
-
     @Enumerated(EnumType.STRING)
+    @NotBlank
     private CreditCardBrand creditCardBrand;
 
     @ManyToOne

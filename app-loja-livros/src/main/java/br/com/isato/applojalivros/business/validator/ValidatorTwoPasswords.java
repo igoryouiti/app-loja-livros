@@ -1,8 +1,6 @@
 package br.com.isato.applojalivros.business.validator;
 
-import br.com.isato.applojalivros.DTO.AbstractUserSenhasDTO;
-import br.com.isato.applojalivros.DTO.CreateUserDTO;
-import jakarta.validation.OverridesAttribute;
+import br.com.isato.applojalivros.DTO.userDTO.AbstractUserSenhasDTO;
 
 public class ValidatorTwoPasswords implements IValidator{
 

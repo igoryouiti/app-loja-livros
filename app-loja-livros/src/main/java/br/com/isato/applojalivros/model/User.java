@@ -1,11 +1,10 @@
 package br.com.isato.applojalivros.model;
 
-import br.com.isato.applojalivros.DTO.CreateUserDTO;
-import br.com.isato.applojalivros.DTO.UpdateUserDTO;
+import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
+import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,8 +34,8 @@ public class User {
 
     private Boolean active;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
+
+    @OneToOne(mappedBy = "user")
     private Customer customer;
 
 

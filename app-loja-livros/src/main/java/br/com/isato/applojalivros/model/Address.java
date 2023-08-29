@@ -18,8 +18,8 @@ public class Address extends AbstractAddress{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     private Customer customer;
+
 }

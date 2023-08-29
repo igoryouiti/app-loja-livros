@@ -1,21 +1,16 @@
 package br.com.isato.applojalivros.controller;
 
 
-import br.com.isato.applojalivros.DTO.CreateUserDTO;
-import br.com.isato.applojalivros.DTO.UpdateUserDTO;
-import br.com.isato.applojalivros.model.Address;
+import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
+import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
 import br.com.isato.applojalivros.model.User;
-import br.com.isato.applojalivros.service.AddressService;
 import br.com.isato.applojalivros.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -38,7 +33,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<User> post (@RequestBody CreateUserDTO createUserDTO){
             return userService.create(createUserDTO)
                     .map(response -> ResponseEntity.ok(response))

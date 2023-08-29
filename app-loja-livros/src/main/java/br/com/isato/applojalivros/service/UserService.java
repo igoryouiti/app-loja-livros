@@ -1,12 +1,11 @@
 package br.com.isato.applojalivros.service;
 
-import br.com.isato.applojalivros.DTO.CreateUserDTO;
-import br.com.isato.applojalivros.DTO.UpdateUserDTO;
+import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
+import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidatorEmail;
 import br.com.isato.applojalivros.business.validator.ValidatorPassword;
 import br.com.isato.applojalivros.business.validator.ValidatorTwoPasswords;
-import br.com.isato.applojalivros.model.BillingAddress;
 import br.com.isato.applojalivros.model.User;
 import br.com.isato.applojalivros.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -85,7 +84,7 @@ public class UserService {
 
         if(optUser.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Endereço não encontrado", null);
+                    "Usuário não encontrado", null);
 
         validator = new ValidatorTwoPasswords();
         if(!validator.validate(updateUserDTO))

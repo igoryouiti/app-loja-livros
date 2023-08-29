@@ -1,6 +1,5 @@
-package br.com.isato.applojalivros.DTO;
+package br.com.isato.applojalivros.DTO.userDTO;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUserDTO extends AbstractUserSenhasDTO{
-
-    @NotBlank
+public class UserLoginDTO {
+    private Long idUser;
     private String email;
-
+    private String password;
+    private String token;
 }

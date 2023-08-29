@@ -1,4 +1,4 @@
-package br.com.isato.applojalivros.DTO;
+package br.com.isato.applojalivros.DTO.userDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

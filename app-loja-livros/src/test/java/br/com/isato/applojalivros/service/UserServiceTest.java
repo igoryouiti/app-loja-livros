@@ -1,6 +1,6 @@
 package br.com.isato.applojalivros.service;
 
-import br.com.isato.applojalivros.DTO.CreateUserDTO;
+import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
 import br.com.isato.applojalivros.model.User;
 import br.com.isato.applojalivros.repository.UserRepository;
 import org.junit.jupiter.api.BeforeAll;

@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers(HttpMethod.GET, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users/create").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/users/password").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/users/active/{id}").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/users/inactive/{id}").permitAll()
