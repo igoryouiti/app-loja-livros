@@ -19,7 +19,7 @@ public interface ShippingAddressRepository extends JpaRepository<ShippingAddress
             tb_shipping_address.type_residence AS typeResidence, 
             tb_shipping_address.fk_customer_id AS customerId
             FROM tb_shipping_address
-            WHERE tb_address.id = :customerId
+            WHERE tb_shipping_address.fk_customer_id = :customerId
              """)
     public List<ShippingAddressProjection> searchAllByCustomer(Long customerId);
 }

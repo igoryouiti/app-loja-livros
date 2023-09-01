@@ -14,31 +14,22 @@ import org.springframework.beans.BeanUtils;
 @AllArgsConstructor
 public class BillingAddressDTO {
 
-
+    private Long id;
     private String typeResidence;
-
     private String typePublicPlace;
-
     private String publicPlace;
-
     private String number;
-
     private String neighborhood;
-
     private String cep;
-
     private String city;
-
     private String state;
-
     private String country;
-
     private String observation;
-
     private Customer customer;
 
     public BillingAddressDTO(BillingAddressProjection entity){
         BeanUtils.copyProperties(entity, this);
+        customer = new Customer();
         customer.setId(entity.getCustomerId());
     }
 }

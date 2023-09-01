@@ -18,7 +18,7 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
             tb_address.type_public_place AS typePublicPlace, tb_address.type_residence AS typeResidence,
             tb_address.fk_customer_id AS customerId
             FROM tb_address
-            WHERE tb_address.id = :customerId
+            WHERE tb_address.fk_customer_id = :customerId
              """)
     public AddressProjection searchByCustomer(Long customerId);
 

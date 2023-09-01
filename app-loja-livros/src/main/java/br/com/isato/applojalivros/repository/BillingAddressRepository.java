@@ -18,7 +18,7 @@ public interface BillingAddressRepository extends JpaRepository<BillingAddress, 
             tb_billing_address.state, tb_billing_address.type_public_place AS typePublicPlace, 
             tb_billing_address.type_residence AS typeResidence, tb_billing_address.fk_customer_id AS customerId
             FROM tb_billing_address
-            WHERE tb_address.id = :customerId
+            WHERE tb_billing_address.fk_customer_id = :customerId
              """)
     public List<BillingAddressProjection> searchAllByCustomer(Long customerId);
 }

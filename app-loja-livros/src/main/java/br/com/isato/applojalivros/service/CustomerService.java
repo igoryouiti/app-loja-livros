@@ -5,6 +5,7 @@ import br.com.isato.applojalivros.DTO.customerDTO.UpdateCustomerDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCpf;
 import br.com.isato.applojalivros.model.Customer;
+import br.com.isato.applojalivros.model.User;
 import br.com.isato.applojalivros.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -55,9 +56,13 @@ public class CustomerService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O Objeto User deve ter um id");
 
+        Optional<User> user = userService.findById(createCustomerDTO.getUser().getId());
+
+        if(user.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "O Objeto User deve existir");
+
         createCustomerDTO.setUser(userService.findById(createCustomerDTO.getUser().getId()).get());
-
-
 
         validator = new ValidadorCpf();
         System.out.println(createCustomerDTO.getCpf());
@@ -99,34 +104,42 @@ public class CustomerService {
         return optCreatedCustomer;
     }
 
-    public Optional<Customer> update(UpdateCustomerDTO updateCustomerDTO){
+    public Optional<Customer> update(@Valid UpdateCustomerDTO updateCustomerDTO){
 
-        if(customerRepository.findById(updateCustomerDTO.getId()).isEmpty())
+        Optional<Customer> optCustomer = customerRepository.findById(updateCustomerDTO.getId());
+
+        if(optCustomer.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O cliente deve ter um id válido");
 
+        if(optCustomer.get().getUser().getId() != updateCustomerDTO.getUser().getId())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "O usuário deve conter um id e ser o mesmo da criação cliente");
+
         validator = new ValidadorCpf();
-        if(validator.validate(updateCustomerDTO.getCpf()))
+        if(!validator.validate(updateCustomerDTO.getCpf()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve conter um CPF válido");
 
         Customer customer = new Customer(updateCustomerDTO);
 
+        customer.setUser(optCustomer.get().getUser());
+
         return Optional.of(customerRepository.save(customer));
     }
 
-    public void deleteById(Long id){
-        if(id == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Deve ser passado um id válido (Long id)!", null);
-        }
-        Optional<Customer> customer = customerRepository.findById(id);
-
-        if(customer.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Endereço não encontrado", null);
-
-        customerRepository.deleteById(id);
-    }
+//    public void deleteById(Long id){
+//        if(id == null){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+//                    "Deve ser passado um id válido (Long id)!", null);
+//        }
+//        Optional<Customer> customer = customerRepository.findById(id);
+//
+//        if(customer.isEmpty())
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+//                    "Cliente não encontrado", null);
+//
+//        customerRepository.deleteById(id);
+//    }
 
 }

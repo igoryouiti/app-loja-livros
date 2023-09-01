@@ -17,8 +17,8 @@ public interface TelephoneRepository extends JpaRepository<Telephone, Long> {
                    tb_phone.ddd,
                    tb_phone.number,
                    tb_phone.fk_customer_id AS customerId
-            FROM tb_phone
-            WHERE p.fk_customer_id = :customerId
+            FROM tb_telephone tb_phone
+            WHERE tb_phone.fk_customer_id = :customerId
              """)
     public TelephoneProjection searchByCustomer(Long customerId);
 }

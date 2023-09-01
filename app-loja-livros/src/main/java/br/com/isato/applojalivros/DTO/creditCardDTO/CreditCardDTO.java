@@ -17,13 +17,13 @@ public class CreditCardDTO {
 
     private Long id;
 
-    private String holder_name;
+    private String holderName;
 
-    private Integer exp_month;
+    private Integer expMonth;
 
-    private Integer exp_year;
+    private Integer expYear;
 
-    private String card_number;
+    private String cardNumber;
 
     private String cvv;
 
@@ -33,6 +33,8 @@ public class CreditCardDTO {
 
     public CreditCardDTO(CreditCardProjection entity){
         BeanUtils.copyProperties(entity, this);
+        customer = new Customer();
+        setCreditCardBrand(entity.getCreditCardBrand());
         customer.setId(entity.getCustomerId());
     }
 

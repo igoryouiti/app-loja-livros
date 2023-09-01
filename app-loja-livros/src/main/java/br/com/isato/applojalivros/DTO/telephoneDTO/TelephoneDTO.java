@@ -15,18 +15,14 @@ import org.springframework.beans.BeanUtils;
 public class TelephoneDTO {
 
     private Long id;
-
-
     private String type;
-
     private String ddd;
-
     private String number;
-
     private Customer customer;
 
     public TelephoneDTO(TelephoneProjection entity){
         BeanUtils.copyProperties(entity, this);
+        customer = new Customer();
         customer.setId(entity.getCustomerId());
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.beans.BeanUtils;
 @AllArgsConstructor
 public class AddressDTO {
 
-
+    private Long id;
     private String typeResidence;
 
     private String typePublicPlace;
@@ -39,6 +39,7 @@ public class AddressDTO {
 
     public AddressDTO(AddressProjection entity){
         BeanUtils.copyProperties(entity, this);
+        customer = new Customer();
         customer.setId(entity.getCustomerId());
     }
 }

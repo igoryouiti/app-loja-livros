@@ -4,10 +4,10 @@ public interface AddressProjection {
     Long getId();
     String getCep();
     String getCity();
-    String getCounty();
+    String getCountry();
     String getNeighborhood();
     String getNumber();
-    String getObrservation();
+    String getObservation();
     String getPublicPlace();
     String getState();
     String getTypePublicPlace();

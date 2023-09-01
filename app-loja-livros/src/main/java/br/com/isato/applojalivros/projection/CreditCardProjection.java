@@ -1,5 +1,7 @@
 package br.com.isato.applojalivros.projection;
 
+import br.com.isato.applojalivros.model.CreditCardBrand;
+
 public interface CreditCardProjection {
 
     Long getId();
@@ -8,7 +10,7 @@ public interface CreditCardProjection {
     Integer getExpYear();
     String getCardNumber();
     String getCvv();
-    String getCreditCardBrand();
+    CreditCardBrand getCreditCardBrand();
     Long getCustomerId();
 
 }

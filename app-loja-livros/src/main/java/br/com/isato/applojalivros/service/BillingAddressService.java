@@ -5,9 +5,11 @@ import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCep;
 import br.com.isato.applojalivros.model.BillingAddress;
+import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.projection.AddressProjection;
 import br.com.isato.applojalivros.projection.BillingAddressProjection;
 import br.com.isato.applojalivros.repository.BillingAddressRepository;
+import br.com.isato.applojalivros.repository.CustomerRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +26,8 @@ public class BillingAddressService {
 
     @Autowired
     private BillingAddressRepository billingAddressRepository;
-
+    @Autowired
+    private CustomerRepository customerRepository;
 
     private IValidator validator;
 
@@ -46,11 +49,19 @@ public class BillingAddressService {
                     "Deve ser passado um id válido (Long id)!", null);
         }
 
+        Optional<Customer> optCustomer = customerRepository.findById(id);
+
+        if(optCustomer.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
+
         List<BillingAddressProjection> addresses = billingAddressRepository.searchAllByCustomer(id);
         return addresses.stream().map(BillingAddressDTO::new).toList();
     }
 
     public Optional<BillingAddress> create(@Valid BillingAddress billingAddress){
+
+
 
         if(billingAddress.getCustomer().getId() == null || billingAddress.getCustomer().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -71,6 +82,8 @@ public class BillingAddressService {
         if(optBillingAddress.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Endereço não encontrado", null);
+
+        billingAddress.setCustomer(optBillingAddress.get().getCustomer());
 
         if(billingAddress.getCustomer().getId() == null || billingAddress.getCustomer().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

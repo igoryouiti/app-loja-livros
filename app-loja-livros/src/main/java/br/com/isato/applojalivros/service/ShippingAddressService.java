@@ -4,9 +4,11 @@ import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
 import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCep;
+import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.ShippingAddress;
 import br.com.isato.applojalivros.projection.BillingAddressProjection;
 import br.com.isato.applojalivros.projection.ShippingAddressProjection;
+import br.com.isato.applojalivros.repository.CustomerRepository;
 import br.com.isato.applojalivros.repository.ShippingAddressRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,8 @@ public class ShippingAddressService {
 
     @Autowired
     private ShippingAddressRepository shippingAddressRepository;
-
+    @Autowired
+    private CustomerRepository customerRepository;
 
     private IValidator validator;
 
@@ -47,6 +50,13 @@ public class ShippingAddressService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
         }
+
+        Optional<Customer> optCustomer = customerRepository.findById(id);
+
+        if(optCustomer.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
+
         return shippingAddressRepository.findById(id);
     }
 
@@ -71,6 +81,8 @@ public class ShippingAddressService {
         if(optShippingAddress.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Endereço não encontrado", null);
+
+        shippingAddress.setCustomer(optShippingAddress.get().getCustomer());
 
         if(shippingAddress.getCustomer().getId() == null || shippingAddress.getCustomer().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

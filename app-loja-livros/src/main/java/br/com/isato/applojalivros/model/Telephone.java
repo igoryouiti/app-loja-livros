@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -28,5 +29,6 @@ public class Telephone {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = "telephone")
     private Customer customer;
 }

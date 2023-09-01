@@ -1,5 +1,7 @@
 package br.com.isato.applojalivros.DTO.customerDTO;
 
+import br.com.isato.applojalivros.DTO.userDTO.UserIdDTO;
+import br.com.isato.applojalivros.model.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -26,10 +28,13 @@ public class UpdateCustomerDTO {
     @NotBlank
     private String gender;
 
-    @NotBlank
+    @NotNull
     private LocalDate birthday;
 
     @NotBlank
     @Size(min = 11, max = 11, message = "O CPF deve conter 11 caracteres numéricos")
     private String cpf;
+
+    @NotNull
+    private UserIdDTO user;
 }

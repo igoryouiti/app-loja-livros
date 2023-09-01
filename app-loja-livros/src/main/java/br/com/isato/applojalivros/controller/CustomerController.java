@@ -62,12 +62,6 @@ public class CustomerController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
-        customerService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("/address/{id}")
     public ResponseEntity<Address> getAddressById(@PathVariable Long id){
         return addressService.findById(id)
@@ -88,11 +82,11 @@ public class CustomerController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @DeleteMapping("/address/{id}")
-    public ResponseEntity deleteAddress(@PathVariable Long id) {
-        addressService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @DeleteMapping("/address/{id}")
+//    public ResponseEntity deleteAddress(@PathVariable Long id) {
+//        addressService.deleteById(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
     @GetMapping("/billing-addresses/{id}")
     public ResponseEntity<BillingAddress> getBillingAddressById(@PathVariable Long id){
@@ -101,19 +95,19 @@ public class CustomerController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     @GetMapping("/{id}/billing-addresses")
-    public ResponseEntity<List<BillingAddressDTO>> getBillingAddressByCustomerId(@PathVariable Long id){
+    public ResponseEntity<List<BillingAddressDTO>> getAllBillingAddressByCustomerId(@PathVariable Long id){
         return ResponseEntity.ok(billingAddressService.searchAllByCustomer(id));
     }
 
     @PostMapping("/billing-addresses")
-    public ResponseEntity<BillingAddress> postBillingAdressess(@RequestBody BillingAddress billingAddress){
+    public ResponseEntity<BillingAddress> postBillingAddress(@RequestBody BillingAddress billingAddress){
         return billingAddressService.create(billingAddress)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/billing-addresses")
-    public ResponseEntity<BillingAddress> updateBillingAddress (@RequestBody BillingAddress billingAddress){
+    public ResponseEntity<BillingAddress> updateBillingAddress(@RequestBody BillingAddress billingAddress){
         return billingAddressService.update(billingAddress)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -132,19 +126,19 @@ public class CustomerController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     @GetMapping("/{id}/shipping-addresses")
-    public ResponseEntity<List<ShippingAddressDTO>> getShippingAddressByCustomerId(@PathVariable Long id){
+    public ResponseEntity<List<ShippingAddressDTO>> getAllShippingAddressByCustomerId(@PathVariable Long id){
         return ResponseEntity.ok(shippingAddressService.searchAllByCustomer(id));
     }
 
     @PostMapping("/shipping-addresses")
-    public ResponseEntity<ShippingAddress> postShippingAdressess (@RequestBody ShippingAddress shippingAddress){
+    public ResponseEntity<ShippingAddress> postShippingAddress(@RequestBody ShippingAddress shippingAddress){
         return shippingAddressService.create(shippingAddress)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/shipping-addresses")
-    public ResponseEntity<ShippingAddress> updateBillingAddress (@RequestBody ShippingAddress shippingAddress){
+    public ResponseEntity<ShippingAddress> updateShippingAddress(@RequestBody ShippingAddress shippingAddress){
         return shippingAddressService.update(shippingAddress)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -157,30 +151,30 @@ public class CustomerController {
     }
 
     @GetMapping("/credit-cards/{id}")
-    public ResponseEntity<CreditCard> getCreditCardById(@PathVariable Long id){
+    public ResponseEntity<CreditCard> getCreditCardsById(@PathVariable Long id){
         return creditCardService.findById(id)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     @GetMapping("/{id}/credit-cards")
-    public ResponseEntity<List<CreditCardDTO>> getCreditCardsByCustomerId(@PathVariable Long id){
+    public ResponseEntity<List<CreditCardDTO>> getAllCreditCardByCustomerId(@PathVariable Long id){
         return ResponseEntity.ok(creditCardService.searchAllByCustomer(id));
     }
 
     @PostMapping("/credit-cards")
-    public ResponseEntity<CreditCard> postCreditCards (@RequestBody CreditCard creditCard){
+    public ResponseEntity<CreditCard> postCreditCard(@RequestBody CreditCard creditCard){
         return creditCardService.create(creditCard)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     @PutMapping("/credit-cards")
-    public ResponseEntity<CreditCard> updateBillingAddress (@RequestBody CreditCard creditCard){
+    public ResponseEntity<CreditCard> updateCreditCard(@RequestBody CreditCard creditCard){
         return creditCardService.update(creditCard)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @DeleteMapping("/credit-card/{id}")
+    @DeleteMapping("/credit-cards/{id}")
     public ResponseEntity deleteCreditCard(@PathVariable Long id) {
         creditCardService.deleteById(id);
         return ResponseEntity.noContent().build();
@@ -200,13 +194,13 @@ public class CustomerController {
     }
 
     @PostMapping("/telephone")
-    public ResponseEntity<Telephone> postTelephone (@RequestBody Telephone telephone){
+    public ResponseEntity<Telephone> postTelephone(@RequestBody Telephone telephone){
         return telephoneService.create(telephone)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     @PutMapping("/telephone")
-    public ResponseEntity<Telephone> updateTelephone (@RequestBody Telephone telephone){
+    public ResponseEntity<Telephone> updateTelephone(@RequestBody Telephone telephone){
         return telephoneService.update(telephone)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());

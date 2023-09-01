@@ -5,8 +5,10 @@ import br.com.isato.applojalivros.DTO.telephoneDTO.TelephoneDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorDdd;
 import br.com.isato.applojalivros.business.validator.ValidadorTelephone;
+import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.Telephone;
 import br.com.isato.applojalivros.projection.TelephoneProjection;
+import br.com.isato.applojalivros.repository.CustomerRepository;
 import br.com.isato.applojalivros.repository.TelephoneRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class TelephoneService {
 
     @Autowired
     private TelephoneRepository telephoneRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     private IValidator validador;
 
@@ -36,6 +40,12 @@ public class TelephoneService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
         }
+
+        Optional<Customer> optCustomer = customerRepository.findById(id);
+
+        if(optCustomer.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
 
         TelephoneDTO telephoneDTO = new TelephoneDTO(telephoneRepository.searchByCustomer(id));
         return Optional.of(telephoneDTO);
@@ -70,21 +80,25 @@ public class TelephoneService {
 
     public Optional<Telephone> update(Telephone telephone){
 
-        if(findById(telephone.getId()).isEmpty())
+        Optional<Telephone> optTelephone = findById(telephone.getId());
+
+        if(optTelephone.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Deve conter id de um telefone válido");
+
+        telephone.setCustomer(optTelephone.get().getCustomer());
 
         if(telephone.getCustomer().getId() == null || telephone.getCustomer().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve conter id do Customer");
 
         validador = new ValidadorDdd();
-        if(validador.validate(telephone.getDdd()))
+        if(!validador.validate(telephone.getDdd()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "DDD é uma String com 2 numeros");
 
         validador = new ValidadorTelephone();
-        if(validador.validate(telephone.getNumber()))
+        if(!validador.validate(telephone.getNumber()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O numero deve ser uma String com 8 a 9 numeros");
 
