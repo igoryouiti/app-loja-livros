@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
 
-import './UserRegister.css'
+import './CustomerRegister.css'
+import { Route, Routes } from 'react-router-dom'
+import UserRegister from '../../../components/client/user-register/UserRegister'
 
-export default class UserRegister extends Component {
+export default class CustomerRegister extends Component {
   render() {
     return (
       <>
+        <Routes> 
+            <Route path="/" element={<UserRegister />} />
+        </Routes>
         <form action="">
-            <div className='login-info'>
-                <h3>Informações de Login</h3>
-                <label htmlFor="userEmail">Email: </label>
-                <input type='email' id='userEmail' name='userEmail'/>
-                <div className='login-password'>
-                    <label htmlFor="userPassword">Senha: </label>
-                    <input type='password' id='userPassword' name='userPassword'/>
-                    <label htmlFor="repeatPassword">Repetir senha: </label>
-                    <input type='password' id='repeatPassword' name='repeatPassword'/>
-                </div>
-            </div>
+
             <div className="user-info">
                 <h3>Informações de Usuario</h3>
                 <label htmlFor="userName">Nome: </label>

@@ -8,7 +8,7 @@ import Products from './products/Products';
 import Checkout from './checkout/Checkout';
 import Chart from './chart/Chart';
 import DashboardCli from './dashboard-cli/DashboardCli';
-import UserRegister from './user-register/UserRegister';
+import CustomerRegister from './customer-register/CustomerRegister';
 
 export default class Client extends Component {
   render() {
@@ -21,7 +21,7 @@ export default class Client extends Component {
                 <Route path='/chart' element={<Chart />} />
                 <Route path='/checkout' element={<Checkout />} />
                 <Route path='/dashboard/*' element={<DashboardCli />} />
-                <Route path='/cadastro/*' element={<UserRegister />} />
+                <Route path='/cadastro/*' element={<CustomerRegister />} />
             </Routes>
             <Footer />
         </>
