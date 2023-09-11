@@ -7,10 +7,10 @@ import User from "./User"
 
 interface Customer{
     id: number,
-    name: string,
-    gender: string,
-    birthday: string,
-    cpf: string,
+    name?: string,
+    gender?: string,
+    birthday?: string,
+    cpf?: string,
     address?: Address|null,
     telephone?: Telephone|null,
     billingAddresses?: BillingAddress[]|null,

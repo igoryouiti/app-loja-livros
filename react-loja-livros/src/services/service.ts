@@ -26,3 +26,22 @@ export const findBillingsByCustomerId = async (url: any, setDado: any, header: a
     const resposta = await api.get(url, header);
     setDado(resposta.data);
 };
+
+export const findBillingById = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
+export const updateBilling = async (url: any, data: any, setData: any) => {
+    const resposta = await api.put(url, data);
+    setData(resposta.data);
+};
+
+export const deleteBilling = async (url: any) => {
+    const resposta = await api.delete(url);
+};
+
+export const createBilling = async (url: any, data: any, setData: any) => {
+    const resposta = await api.post(url, data);
+    setData(resposta.data);
+};

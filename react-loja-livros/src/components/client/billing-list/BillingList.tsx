@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import BillingAddress from '../../../models/BillingAddress';
 import { findBillingsByCustomerId } from '../../../services/service';
 
 export default function BillingList() {
 
     const { customerId } = useParams()
+
+    let navigate = useNavigate();
 
 
     const [billings, setBillings] = useState<BillingAddress[]>([])
@@ -20,21 +22,38 @@ export default function BillingList() {
         getBillingsByCustomerId();
     }, [customerId]);
 
-  return (
-    <>
-        <div className="billing-list-container">
+    function goToCreateBilling(){
+        navigate("create")
+    }
+
+    return (
+        <>
+            <div className="billing-list-container">
+                <h1>Endereços de Cobrança</h1>
+                <div className="billing-add">
+                    <button onClick={goToCreateBilling}>Adicionar um endereço de cobrança</button>
+                </div>
                 <div className="billing-list">
                     <ul className="billing-itens">
                         {
                             billings.map(billing => (
                                 <li className="observation-nickname" key={billing.id}>
-                                    <label htmlFor="observation">{billing.observation}</label>
+                                    <h3><label htmlFor="observation">{billing.observation} </label></h3>
+                                    <label htmlFor='address'>
+                                        {billing.typePublicPlace} {billing.publicPlace} - 
+                                    </label>
+                                    <label htmlFor='neighborhood'> {billing.neighborhood} </label>
+                                    <label htmlFor='city'>{billing.city} </label>
+                                    <Link to={`${billing.id}`}>
+                                        <button>Detalhar</button>
+                                    </Link>
                                 </li>
                             ))
                         }
                     </ul>
                 </div>
             </div>
-    </>
-  )
+        </>
+    )
 }
+
