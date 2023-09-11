@@ -1,11 +1,14 @@
+import Customer from "./Customer"
+
 interface CreditCard {
     id: number,
     cardNumber: string,
     holderName: string,
-    expMonth: number,
-    expYear: number,
+    expMonth: string,
+    expYear: string,
     cvv: string,
-    creditCardBrand: string
+    creditCardBrand: string,
+    customer?: Customer|null
 }
 
 export default CreditCard

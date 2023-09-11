@@ -19,7 +19,7 @@ export default function DetailedTransaction() {
               <button className="plus-quantity-chart-item">+</button>
             </div>
             <div>EM PROCESSAMENTO</div>
-            <button onClick={myFunction}>Troca</button>
+            <button>Troca</button>
           </div>
         </div>
         <div className="chart-options">

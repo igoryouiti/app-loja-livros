@@ -5,7 +5,7 @@ interface User {
     email: string,
     password: string,
     password2:string,
-    customer?: Customer
+    customer: Customer|null
 }
 
 export default User

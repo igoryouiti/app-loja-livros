@@ -3,18 +3,20 @@ import BillingAddress from "./BillingAddress"
 import CreditCard from "./CreditCard"
 import ShippingAddress from "./ShippingAddress"
 import Telephone from "./Telephone"
+import User from "./User"
 
 interface Customer{
-    id: string,
+    id: number,
     name: string,
     gender: string,
     birthday: string,
     cpf: string,
-    address?: Address,
-    telephone?: Telephone,
-    billingAddresses?: BillingAddress[],
-    shippingAddresses?: ShippingAddress[],
-    creditCards?: CreditCard[]
+    address?: Address|null,
+    telephone?: Telephone|null,
+    billingAddresses?: BillingAddress[]|null,
+    shippingAddresses?: ShippingAddress[]|null,
+    creditCards?: CreditCard[]|null,
+    user?: User|null
 }
 
 export default Customer
