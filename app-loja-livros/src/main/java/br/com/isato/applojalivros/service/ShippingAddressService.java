@@ -51,12 +51,6 @@ public class ShippingAddressService {
                     "Deve ser passado um id válido (Long id)!", null);
         }
 
-        Optional<Customer> optCustomer = customerRepository.findById(id);
-
-        if(optCustomer.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Deve ser passado o id cliente válido (Long id)!", null);
-
         return shippingAddressRepository.findById(id);
     }
 
