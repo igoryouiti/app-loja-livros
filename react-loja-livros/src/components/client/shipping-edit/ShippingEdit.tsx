@@ -1,16 +1,16 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { deleteBilling, findBillingById, updateBilling } from '../../../services/service';
-import BillingAddress from '../../../models/BillingAddress';
+import { deleteShipping, findShippingById, updateShipping } from '../../../services/service';
+import ShippingAddress from '../../../models/ShippingAddress';
 
-export default function BillingEdit() {
+export default function ShippingEdit() {
 
-    const { customerId, billingAddressId } = useParams()
+    const { customerId, shippingAddressId } = useParams()
 
     let navigate = useNavigate()
 
 
-    const [billing, setBilling] = useState<BillingAddress>({
+    const [shipping, setShipping] = useState<ShippingAddress>({
         id: 0,
         typeResidence: "",
         typePublicPlace: "",
@@ -24,7 +24,7 @@ export default function BillingEdit() {
         observation: ""
     })
 
-    const [resultBilling, setResultBilling] = useState<BillingAddress>({
+    const [resultShipping, setResultShipping] = useState<ShippingAddress>({
         id: 0,
         typeResidence: "",
         typePublicPlace: "",
@@ -39,41 +39,41 @@ export default function BillingEdit() {
     })
 
 
-    async function getBillingsById() {
-        await findBillingById(`/customers/billing-addresses/${billingAddressId}`, setBilling, {});
+    async function getShippingsById() {
+        await findShippingById(`/customers/shipping-addresses/${shippingAddressId}`, setShipping, {});
     }
 
 
     useEffect(() => {
-        getBillingsById();
-    }, [billingAddressId]);
+        getShippingsById();
+    }, [shippingAddressId]);
 
-    function handleBillingChange(e: ChangeEvent<HTMLInputElement>) {
-        setBilling({
-            ...billing,
+    function handleShippingChange(e: ChangeEvent<HTMLInputElement>) {
+        setShipping({
+            ...shipping,
             [e.target.name]: e.target.value
         });
     }
 
-    async function billingDelete(){
+    async function shippingDelete(){
         try {
-            await deleteBilling(`/customers/billing-addresses/${billing.id}`)
+            await deleteShipping(`/customers/shipping-addresses/${shipping.id}`)
 
         } catch (error) {
             console.log(`Error: ${error}`)
         }
         
-        navigate("../billings")
+        navigate("../shippings")
 
     }
 
-    async function billingUpdate(e: ChangeEvent<HTMLFormElement>) {
+    async function shippingUpdate(e: ChangeEvent<HTMLFormElement>) {
 
         e.preventDefault()
 
         try {
-            await updateBilling(`/customers/billing-addresses`, billing, setResultBilling)
-            navigate("../billings")
+            await updateShipping(`/customers/shipping-addresses`, shipping, setResultShipping)
+            navigate("../shippings")
         } catch (error) {
             console.log(`Error: ${error}`)
         }
@@ -83,7 +83,7 @@ export default function BillingEdit() {
 
     return (
         <>
-            <form onSubmit={billingUpdate}>
+            <form onSubmit={shippingUpdate}>
                 <div className="adresses-info-container">
                     <div className="address-info">
                         <h3>Endereço de Cobrança</h3>
@@ -91,80 +91,80 @@ export default function BillingEdit() {
                             <div>
                                 <label htmlFor="typeResidence">Tipo Residência: </label>
                                 <input type='text' id='typeResidence' name='typeResidence'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.typeResidence}
+                                    value={shipping.typeResidence}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="typePublicPlace">Tipo Logradouro: </label>
                                 <input type='text' id='typePublicPlace' name='typePublicPlace'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.typePublicPlace}
+                                    value={shipping.typePublicPlace}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="publicPlace">Logradouro: </label>
                                 <input type='text' id='publicPlace' name='publicPlace'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.publicPlace}
+                                    value={shipping.publicPlace}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="number">Número: </label>
                                 <input type='text' id='number' name='number'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.number}
+                                    value={shipping.number}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="neighborhood">Bairro: </label>
                                 <input type='text' id='neighborhood' name='neighborhood'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.neighborhood}
+                                    value={shipping.neighborhood}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="cep">CEP: </label>
                                 <input type='text' id='cep' name='cep'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.cep}
+                                    value={shipping.cep}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="city">Cidade: </label>
                                 <input type='text' id='city' name='city'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.city}
+                                    value={shipping.city}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="state">Estado: </label>
                                 <input type='text' id='state' name='state'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.state}
+                                    value={shipping.state}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="country">País: </label>
                                 <input type='text' id='country' name='country' autoComplete="off"
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
                                     required
-                                    value={billing.country}
+                                    value={shipping.country}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="observation">Observação/Apelido: </label>
                                 <input type='text' id='observation' name='observation'
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleBillingChange(e)}
-                                    value={billing.observation}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleShippingChange(e)}
+                                    value={shipping.observation}
                                 />
                             </div>
                         </div>
@@ -172,7 +172,7 @@ export default function BillingEdit() {
                 </div>
                 <button type='submit'>Alterar</button>
             </form>
-            <button onClick={billingDelete}>Deletar</button>
+            <button onClick={shippingDelete}>Deletar</button>
         </>
     )
 }

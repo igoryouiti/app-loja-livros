@@ -45,3 +45,27 @@ export const createBilling = async (url: any, data: any, setData: any) => {
     const resposta = await api.post(url, data);
     setData(resposta.data);
 };
+
+export const findShippingsByCustomerId = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
+export const findShippingById = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
+export const updateShipping = async (url: any, data: any, setData: any) => {
+    const resposta = await api.put(url, data);
+    setData(resposta.data);
+};
+
+export const deleteShipping = async (url: any) => {
+    const resposta = await api.delete(url);
+};
+
+export const createShipping = async (url: any, data: any, setData: any) => {
+    const resposta = await api.post(url, data);
+    setData(resposta.data);
+};
