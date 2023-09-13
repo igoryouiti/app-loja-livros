@@ -118,6 +118,7 @@ export default function CustomerRegisterComp() {
 		expMonth: "",
 		expYear: "",
 		cvv: '',
+		observation: "",
 		creditCardBrand: "MASTERCARD",
 		customer: null
 	})
@@ -642,6 +643,13 @@ export default function CustomerRegisterComp() {
 						/>
 					</div>
 					<div>
+						<label htmlFor="observation">Observação/Apelido: </label>
+						<input type='text' id='observation' name='observation'
+							onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCreditCard(e)}
+							required
+						/>
+					</div>
+					<div>
 						<label htmlFor="creditCardBrand">Bandeira:</label>
 						<select id="creditCardBrand" name="creditCardBrand"
 							onChange={(e: ChangeEvent<HTMLSelectElement>) => updatedCreditCard(e)}
@@ -653,7 +661,7 @@ export default function CustomerRegisterComp() {
 							<option value="ELO">American Express</option>
 							<option value="HIPERCARD">Hipercard</option>
 							<option value="DINERS">Diners</option>
-							<option value="DISCOVERY">Discovery</option>
+							<option value="DISCOVER">Discover</option>
 							<option value="AURA">Aura</option>
 							<option value="JCB">JCB</option>
 						</select>

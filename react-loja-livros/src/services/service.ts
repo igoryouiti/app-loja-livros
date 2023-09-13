@@ -69,3 +69,27 @@ export const createShipping = async (url: any, data: any, setData: any) => {
     const resposta = await api.post(url, data);
     setData(resposta.data);
 };
+
+export const findCreditCardsByCustomerId = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
+export const finCreditCardgById = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
+export const updateCreditCard = async (url: any, data: any, setData: any) => {
+    const resposta = await api.put(url, data);
+    setData(resposta.data);
+};
+
+export const deleteCreditCard = async (url: any) => {
+    const resposta = await api.delete(url);
+};
+
+export const createCreditCard = async (url: any, data: any, setData: any) => {
+    const resposta = await api.post(url, data);
+    setData(resposta.data);
+};

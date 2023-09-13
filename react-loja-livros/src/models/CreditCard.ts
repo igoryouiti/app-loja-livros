@@ -7,6 +7,7 @@ interface CreditCard {
     expMonth: string,
     expYear: string,
     cvv: string,
+    observation?: string,
     creditCardBrand: string,
     customer?: Customer|null
 }

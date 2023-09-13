@@ -9,6 +9,10 @@ import BillingCreate from '../../../components/client/billing-create/BillingCrea
 import ShippingList from '../../../components/client/shipping-list/ShippingList'
 import ShippingEdit from '../../../components/client/shipping-edit/ShippingEdit'
 import ShippingCreate from '../../../components/client/shipping-create/ShippingCreate'
+import CreditCardEdit from '../../../components/client/credit-card-edit/CreditCardEdit'
+import CreditCardCreate from '../../../components/client/credit-card-create/CreditCardCreate'
+import CreditCardList from '../../../components/client/credit-card-list/CreditCardList'
+
 
 
 
@@ -24,7 +28,9 @@ function DashboardCliSettings() {
                 <Route path="/shippings" element={<ShippingList />} />
                 <Route path="/shippings/:shippingAddressId" element={<ShippingEdit />} />
                 <Route path="/shippings/create" element={<ShippingCreate />} />
-                <Route path="/credit-cards" element={<DashboardCliSettings />} />
+                <Route path="/credit-cards" element={<CreditCardList />} />
+                <Route path="/credit-cards/:creditCardId" element={<CreditCardEdit />} />
+                <Route path="/credit-cards/create" element={<CreditCardCreate />} />
                 <Route path="/password" element={<DashboardCliSettings />} />
             </Routes>
 
