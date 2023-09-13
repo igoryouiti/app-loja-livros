@@ -12,6 +12,8 @@ import ShippingCreate from '../../../components/client/shipping-create/ShippingC
 import CreditCardEdit from '../../../components/client/credit-card-edit/CreditCardEdit'
 import CreditCardCreate from '../../../components/client/credit-card-create/CreditCardCreate'
 import CreditCardList from '../../../components/client/credit-card-list/CreditCardList'
+import PasswordEdit from '../../../components/client/password-edit/PasswordEdit'
+import AccountInactivate from '../../../components/client/account-inactivate/AccountInactivate'
 
 
 
@@ -31,7 +33,8 @@ function DashboardCliSettings() {
                 <Route path="/credit-cards" element={<CreditCardList />} />
                 <Route path="/credit-cards/:creditCardId" element={<CreditCardEdit />} />
                 <Route path="/credit-cards/create" element={<CreditCardCreate />} />
-                <Route path="/password" element={<DashboardCliSettings />} />
+                <Route path="/password" element={<PasswordEdit />} />
+                <Route path="/inactivate" element={<AccountInactivate />} />
             </Routes>
 
         </>

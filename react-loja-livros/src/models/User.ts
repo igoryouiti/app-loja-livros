@@ -5,6 +5,7 @@ interface User {
     email: string,
     password: string,
     password2:string,
+    active?: boolean,
     customer: Customer|null
 }
 

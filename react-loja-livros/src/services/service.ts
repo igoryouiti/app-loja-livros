@@ -7,6 +7,21 @@ export const postUser = async (url: any, data: any, setData: any) => {
     setData(resposta.data);
 };
 
+export const findUserByCustomerId = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
+export const updateUser = async (url: any, data: any, setData: any) => {
+    const resposta = await api.put(url, data);
+    setData(resposta.data);
+};
+
+export const inactivateUser = async (url: any, setData: any) => {
+    const resposta = await api.put(url);
+    setData(resposta.data);
+};
+
 export const postCustomer = async (url: any, data: any, setData: any) => {
     const resposta = await api.post(url, data);
     setData(resposta.data);
@@ -75,7 +90,7 @@ export const findCreditCardsByCustomerId = async (url: any, setDado: any, header
     setDado(resposta.data);
 };
 
-export const finCreditCardgById = async (url: any, setDado: any, header: any) => {
+export const findCreditCardById = async (url: any, setDado: any, header: any) => {
     const resposta = await api.get(url, header);
     setDado(resposta.data);
 };
@@ -93,3 +108,4 @@ export const createCreditCard = async (url: any, data: any, setData: any) => {
     const resposta = await api.post(url, data);
     setData(resposta.data);
 };
+

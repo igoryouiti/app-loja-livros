@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import CreditCard from '../../../models/CreditCard'
-import { deleteCreditCard, findCreditCardsByCustomerId, updateCreditCard } from '../../../services/service'
+import { deleteCreditCard, findCreditCardById, findCreditCardsByCustomerId, updateCreditCard } from '../../../services/service'
 
 export default function CreditCardEdit() {
 
@@ -34,7 +34,7 @@ export default function CreditCardEdit() {
 
 
   async function getCreditCardsById() {
-    await findCreditCardsByCustomerId(`/customers/credit-cards/${creditCardId}`, setCreditCard, {});
+    await findCreditCardById(`/customers/credit-cards/${creditCardId}`, setCreditCard, {});
   }
 
 

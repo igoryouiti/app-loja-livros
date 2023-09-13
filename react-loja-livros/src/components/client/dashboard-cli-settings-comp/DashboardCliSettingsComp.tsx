@@ -11,6 +11,7 @@ export default function DashboardCliSettingsComp() {
             <Link to="/dashboard/11/settings/shippings">Gerenciar Endereços de Entregas</Link><br /><br />
             <Link to="/dashboard/11/settings/credit-cards">Gerenciar Cartões de Créditos</Link><br /><br />
             <Link to="/dashboard/11/settings/password">Trocar Senha</Link><br /><br />
+            <Link to="/dashboard/11/settings/inactivate">Inativar Conta</Link><br /><br />
         </>
     )
 }
