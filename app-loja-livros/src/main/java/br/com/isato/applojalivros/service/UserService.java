@@ -1,12 +1,15 @@
 package br.com.isato.applojalivros.service;
 
+import br.com.isato.applojalivros.DTO.telephoneDTO.TelephoneDTO;
 import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
 import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidatorEmail;
 import br.com.isato.applojalivros.business.validator.ValidatorPassword;
 import br.com.isato.applojalivros.business.validator.ValidatorTwoPasswords;
+import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.User;
+import br.com.isato.applojalivros.repository.CustomerRepository;
 import br.com.isato.applojalivros.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.apache.commons.codec.binary.Base64;
@@ -28,6 +31,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     private IValidator validator;
 
     public List<User> findAll(){
@@ -41,6 +47,22 @@ public class UserService {
         }
 
         return userRepository.findById(id);
+    }
+
+    public Optional<User> searchByCustomer(Long id){
+        if(id == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Deve ser passado um id válido (Long id)!", null);
+        }
+
+        Optional<Customer> optCustomer = customerRepository.findById(id);
+
+        if(optCustomer.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
+
+        User user = new User(userRepository.searchByCustomer(id));
+        return Optional.of(user);
     }
 
     public Optional<User> create(@Valid CreateUserDTO createUserDTO){

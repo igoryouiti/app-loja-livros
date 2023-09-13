@@ -17,6 +17,7 @@ public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
                    tb_credit_card.exp_year AS expYear,
                    tb_credit_card.card_number AS cardNumber,
                    tb_credit_card.cvv AS cvv,
+                   tb_credit_card.observation AS observation,
                    tb_credit_card.credit_card_brand AS creditCardBrand,
                    tb_credit_card.fk_customer_id AS customerId
             FROM tb_credit_card

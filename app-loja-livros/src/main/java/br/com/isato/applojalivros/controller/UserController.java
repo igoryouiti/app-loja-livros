@@ -33,6 +33,14 @@ public class UserController {
 
     }
 
+    @GetMapping("/customer/{id}")
+    public ResponseEntity<User> getByCustomerId(@PathVariable Long id){
+        return userService.searchByCustomer(id)
+                .map(response -> ResponseEntity.ok(response))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
+    }
+
     @PostMapping
     public ResponseEntity<User> post (@RequestBody CreateUserDTO createUserDTO){
             return userService.create(createUserDTO)

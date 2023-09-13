@@ -27,6 +27,8 @@ public class CreditCardDTO {
 
     private String cvv;
 
+    private String observation;
+
     private CreditCardBrand creditCardBrand;
 
     private Customer customer;

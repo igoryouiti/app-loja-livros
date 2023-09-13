@@ -15,4 +15,6 @@ public class UpdateUserDTO extends AbstractUserSenhasDTO{
     @NotNull
     private Long id;
 
+
+
 }

@@ -2,6 +2,7 @@ package br.com.isato.applojalivros.model;
 
 import br.com.isato.applojalivros.DTO.userDTO.CreateUserDTO;
 import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
+import br.com.isato.applojalivros.projection.UserProjection;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -47,6 +48,12 @@ public class User {
 
     public User(UpdateUserDTO entity){
         BeanUtils.copyProperties(entity, this);
+    }
+
+    public User(UserProjection entity){
+        BeanUtils.copyProperties(entity, this);
+        customer = new Customer();
+        customer.setId(entity.getCustomerId());
     }
 
 }

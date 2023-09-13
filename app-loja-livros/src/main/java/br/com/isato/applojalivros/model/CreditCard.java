@@ -40,6 +40,9 @@ public class CreditCard {
     @Size(min = 3, max = 4, message = "O cvv deve conter de 3 a 4 digitos")
     private String cvv;
 
+    @Column(columnDefinition = "TEXT")
+    private String observation;
+
     @Enumerated(EnumType.STRING)
     @NotNull
     private CreditCardBrand creditCardBrand;

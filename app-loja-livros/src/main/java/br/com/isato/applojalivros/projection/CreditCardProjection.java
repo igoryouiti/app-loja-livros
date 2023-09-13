@@ -10,6 +10,7 @@ public interface CreditCardProjection {
     Integer getExpYear();
     String getCardNumber();
     String getCvv();
+    String getObservation();
     CreditCardBrand getCreditCardBrand();
     Long getCustomerId();
 
