@@ -30,7 +30,7 @@ export default function UserRegister() {
 
   useEffect(() => {
     if (userResult.id !== 0) {
-      navigate(`/cadastro/cliente/${userResult.id}`);
+      navigate(`${userResult.id}/customer`);
     }
   }, [userResult]);
 

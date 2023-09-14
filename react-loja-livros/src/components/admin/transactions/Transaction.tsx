@@ -28,7 +28,7 @@ export default function Transaction() {
                                     <option value="5">TROCA AUTORIZADA</option>
                                 </select>
                             </div>
-                            <Link to='transactions/3'>
+                            <Link to='3'>
                                 <button>Detalhar</button>
                             </Link>
                         </li>

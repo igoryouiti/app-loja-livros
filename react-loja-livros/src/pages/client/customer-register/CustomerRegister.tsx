@@ -11,7 +11,7 @@ export default function CustomerRegister() {
     <>
       <Routes>
         <Route path="/" element={<UserRegister />}/>
-        <Route path="/cliente/:userId" element={<CustomerRegisterComp />} />
+        <Route path="/:userId/customer" element={<CustomerRegisterComp />} />
       </Routes>
     </>
   )

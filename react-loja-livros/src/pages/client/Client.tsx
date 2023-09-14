@@ -23,7 +23,7 @@ export default function Client() {
         <Route path='/chart' element={<Chart />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/dashboard/*' element={<DashboardCli />} />
-        <Route path='/cadastro/*' element={<CustomerRegister />} />
+        <Route path='/register/*' element={<CustomerRegister />} />
       </Routes>
       <Footer />
     </>

@@ -135,7 +135,7 @@ export default function CustomerRegisterComp() {
 
 	useEffect(() => {
 		if (customerResult.id != 0) {
-			navigate("/")
+			navigate(`/dashboard/${customerResult.id}/settings`) 
 		}
 	}, [customerResult])
 
