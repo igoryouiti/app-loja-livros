@@ -22,6 +22,19 @@ export const inactivateUser = async (url: any, setData: any) => {
     setData(resposta.data);
 };
 
+export const inactivateUserNoData = async (url: any) => {
+    const resposta = await api.put(url);
+};
+
+export const activateUser = async (url: any) => {
+    const resposta = await api.put(url);
+};
+
+export const findAllCustomers = async (url: any, setDado: any, header: any) => {
+    const resposta = await api.get(url, header);
+    setDado(resposta.data);
+};
+
 export const postCustomer = async (url: any, data: any, setData: any) => {
     const resposta = await api.post(url, data);
     setData(resposta.data);
