@@ -2,6 +2,7 @@ package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.DTO.addressDTO.AddressDTO;
 import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
+import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingMinDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCep;
 import br.com.isato.applojalivros.model.BillingAddress;
@@ -35,12 +36,14 @@ public class BillingAddressService {
         return billingAddressRepository.findAll();
     }
 
-    public Optional<BillingAddress> findById(Long id){
+    public Optional<BillingMinDTO> findById(Long id){
         if(id == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
         }
-        return billingAddressRepository.findById(id);
+
+        BillingMinDTO billingMinDTO = new BillingMinDTO(billingAddressRepository.findById(id).get());
+        return Optional.of(billingMinDTO);
     }
 
     public List<BillingAddressDTO> searchAllByCustomer(Long id){

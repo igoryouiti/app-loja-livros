@@ -2,6 +2,7 @@ package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
 import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressDTO;
+import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressMinDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCep;
 import br.com.isato.applojalivros.model.Customer;
@@ -45,13 +46,15 @@ public class ShippingAddressService {
         return addresses.stream().map(ShippingAddressDTO::new).toList();
     }
 
-    public Optional<ShippingAddress> findById(Long id){
+    public Optional<ShippingAddressMinDTO> findById(Long id){
         if(id == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
         }
 
-        return shippingAddressRepository.findById(id);
+        ShippingAddressMinDTO shippingAddressMinDTO = new ShippingAddressMinDTO(shippingAddressRepository.findById(id).get());
+
+        return Optional.of(shippingAddressMinDTO);
     }
 
     public Optional<ShippingAddress> create(@Valid ShippingAddress shippingAddress){

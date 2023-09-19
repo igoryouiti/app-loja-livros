@@ -93,7 +93,7 @@ public class CustomerService {
         createCustomerDTO.getTelephone().setCustomer(optCreatedCustomer.get());
         if(telephoneService.create(createCustomerDTO.getTelephone()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Erro na criação de endereço de cobrança");
+                    "Erro na criação de telefone");
 
 
         createCustomerDTO.getCreditCards().setCustomer(optCreatedCustomer.get());

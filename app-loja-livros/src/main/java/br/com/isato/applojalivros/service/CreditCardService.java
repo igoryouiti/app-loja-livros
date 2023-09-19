@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardDTO;
+import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardMinDTO;
 import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCardNumber;
@@ -11,6 +12,7 @@ import br.com.isato.applojalivros.projection.CreditCardProjection;
 import br.com.isato.applojalivros.projection.ShippingAddressProjection;
 import br.com.isato.applojalivros.repository.CreditCardRepository;
 import br.com.isato.applojalivros.repository.CustomerRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -48,15 +50,17 @@ public class CreditCardService {
         return creditCards.stream().map(CreditCardDTO::new).toList();
     }
 
-    public Optional<CreditCard> findById(Long id){
+    public Optional<CreditCardMinDTO> findById(Long id){
         if(id == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve ser passado um id válido (Long id)!", null);
         }
-        return creditCardRepository.findById(id);
+
+        CreditCardMinDTO creditCardMinDTO = new CreditCardMinDTO(creditCardRepository.findById(id).get());
+        return Optional.of(creditCardMinDTO);
     }
 
-    public Optional<CreditCard> create(CreditCard creditCard){
+    public Optional<CreditCard> create(@Valid CreditCard creditCard){
 
         if(creditCard.getCustomer().getId() == null || creditCard.getCustomer().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -75,9 +79,9 @@ public class CreditCardService {
         return Optional.of(creditCardRepository.save(creditCard));
     }
 
-    public Optional<CreditCard> update(CreditCard creditCard){
+    public Optional<CreditCard> update(@Valid CreditCard creditCard){
 
-        Optional<CreditCard> optCreditCard = findById(creditCard.getId());
+        Optional<CreditCard> optCreditCard = creditCardRepository.findById(creditCard.getId());
 
         if(optCreditCard.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,

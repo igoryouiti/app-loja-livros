@@ -2,10 +2,13 @@ package br.com.isato.applojalivros.controller;
 
 import br.com.isato.applojalivros.DTO.addressDTO.AddressDTO;
 import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
+import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingMinDTO;
 import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardDTO;
+import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardMinDTO;
 import br.com.isato.applojalivros.DTO.customerDTO.CreateCustomerDTO;
 import br.com.isato.applojalivros.DTO.customerDTO.UpdateCustomerDTO;
 import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressDTO;
+import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressMinDTO;
 import br.com.isato.applojalivros.DTO.telephoneDTO.TelephoneDTO;
 import br.com.isato.applojalivros.model.*;
 import br.com.isato.applojalivros.service.*;
@@ -89,7 +92,7 @@ public class CustomerController {
 //    }
 
     @GetMapping("/billing-addresses/{id}")
-    public ResponseEntity<BillingAddress> getBillingAddressById(@PathVariable Long id){
+    public ResponseEntity<BillingMinDTO> getBillingAddressById(@PathVariable Long id){
         return billingAddressService.findById(id)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -120,7 +123,7 @@ public class CustomerController {
     }
 
     @GetMapping("/shipping-addresses/{id}")
-    public ResponseEntity<ShippingAddress> getShippingAddressById(@PathVariable Long id){
+    public ResponseEntity<ShippingAddressMinDTO> getShippingAddressById(@PathVariable Long id){
         return shippingAddressService.findById(id)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -151,7 +154,7 @@ public class CustomerController {
     }
 
     @GetMapping("/credit-cards/{id}")
-    public ResponseEntity<CreditCard> getCreditCardsById(@PathVariable Long id){
+    public ResponseEntity<CreditCardMinDTO> getCreditCardsById(@PathVariable Long id){
         return creditCardService.findById(id)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -29,24 +30,25 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers(HttpMethod.GET, "/users").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/users/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/users/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/users/password").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/users/active/{id}").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/users/inactive/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/users/{id}").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/customers").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/customers").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/customers").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/customers").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/customers/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/customers/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/customers/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/customers/**").permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/**", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/{id}", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users", HttpMethod.POST.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/password", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/active/{id}", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/inactive/{id}", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/{id}", HttpMethod.DELETE.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers", HttpMethod.POST.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers", HttpMethod.DELETE.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers/**", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers/**", HttpMethod.POST.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers/**", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/customers/**", HttpMethod.DELETE.toString())).permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 )
