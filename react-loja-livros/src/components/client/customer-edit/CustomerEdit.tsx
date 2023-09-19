@@ -91,6 +91,10 @@ export default function CustomerEdit() {
         });
     }
 
+    function goBack(){
+        navigate("../")
+    }
+
 
     async function customerUpdate(e: ChangeEvent<HTMLFormElement>) {
 
@@ -264,6 +268,7 @@ export default function CustomerEdit() {
                     </div>
                 </div>
                 <button type='submit'>Alterar</button>
+                <button onClick={goBack}>Voltar</button>
             </form>
         </>
     )

@@ -18,7 +18,7 @@ export default function CreditCardCreate() {
     expYear: "",
     cvv: '',
     observation: "",
-    creditCardBrand: "",
+    creditCardBrand: "MASTERCARD",
   })
 
   const [resultCreditCard, setResultCreditCard] = useState<CreditCard>({
@@ -64,10 +64,13 @@ export default function CreditCardCreate() {
 
   }
 
-
+  function goBack(){
+    navigate("../credit-cards")
+  }
 
   return (
     <>
+      <button onClick={goBack}>Voltar</button>
       <form onSubmit={CreditCardCreate}>
         <div className="credit-card-container">
           <div className="card-info">

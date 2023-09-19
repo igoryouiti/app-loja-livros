@@ -69,8 +69,14 @@ export default function ShippingCreate() {
 
     }
 
+    function goBack(){
+        navigate("../shippings")
+    }
+
+
     return (
         <>
+            <button onClick={goBack}>Voltar</button>
             <form onSubmit={shippingCreate}>
                 <div className="adresses-info-container">
                     <div className="address-info">

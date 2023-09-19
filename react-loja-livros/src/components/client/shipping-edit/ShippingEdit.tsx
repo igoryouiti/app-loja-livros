@@ -80,9 +80,13 @@ export default function ShippingEdit() {
 
     }
 
+    function goBack(){
+        navigate("../shippings")
+    }
 
     return (
         <>
+            <button onClick={goBack}>Voltar</button>
             <form onSubmit={shippingUpdate}>
                 <div className="adresses-info-container">
                     <div className="address-info">

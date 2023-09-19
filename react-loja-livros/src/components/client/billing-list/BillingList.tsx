@@ -26,10 +26,15 @@ export default function BillingList() {
         navigate("create")
     }
 
+    function goBack(){
+        navigate("../")
+    }
+
     return (
         <>
             <div className="billing-list-container">
                 <h1>Endereços de Cobrança</h1>
+                <button onClick={goBack}>Voltar</button>
                 <div className="billing-add">
                     <button onClick={goToCreateBilling}>Adicionar um endereço de cobrança</button>
                 </div>

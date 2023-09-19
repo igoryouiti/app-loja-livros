@@ -1,7 +1,21 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { deleteBilling, findBillingById, updateBilling } from '../../../services/service';
-import BillingAddress from '../../../models/BillingAddress';
+
+
+interface BillingAddress{
+    id: number,
+    typeResidence: string,
+    typePublicPlace: string,
+    publicPlace: string,
+    number: string,
+    neighborhood:string,
+    cep:string,
+    city:string,
+    state:string,
+    country:string,
+    observation?: string
+}
 
 export default function BillingEdit() {
 
@@ -80,9 +94,14 @@ export default function BillingEdit() {
 
     }
 
+    function goBack(){
+        navigate("../billings")
+    }
+
 
     return (
         <>
+            <button onClick={goBack}>Voltar</button>
             <form onSubmit={billingUpdate}>
                 <div className="adresses-info-container">
                     <div className="address-info">

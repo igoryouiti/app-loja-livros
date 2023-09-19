@@ -67,8 +67,13 @@ export default function PasswordEdit() {
         }
     }
 
+    function goBack(){
+        navigate("../")
+    }
+
     return (
         <>
+            <button onClick={goBack}>Voltar</button>
             <form onSubmit={updatePassword}>
                 <div className='login-info'>
                     <h3>Atualizar Senha</h3>

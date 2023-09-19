@@ -26,10 +26,15 @@ export default function CreditCardList() {
         navigate("create")
     }
 
+    function goBack(){
+        navigate("../")
+    }
+
     return (
         <>
             <div className="creditcard-list-container">
                 <h1>Cartões de Créditos</h1>
+                <button onClick={goBack}>Voltar</button>
                 <div className="creditcard-add">
                     <button onClick={goToCreateCreditCard}>Adicionar um Cartão de Crédito</button>
                 </div>

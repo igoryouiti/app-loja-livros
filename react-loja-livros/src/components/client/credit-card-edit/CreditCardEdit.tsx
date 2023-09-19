@@ -74,10 +74,13 @@ export default function CreditCardEdit() {
 
   }
 
-
+  function goBack(){
+    navigate("../credit-cards")
+  }
 
   return (
     <>
+      <button onClick={goBack}>Voltar</button>
       <form onSubmit={creditCardUpdate}>
         <div className="credit-card-container">
           <div className="card-info">

@@ -645,8 +645,7 @@ export default function CustomerRegisterComp() {
 					<div>
 						<label htmlFor="observation">Observação/Apelido: </label>
 						<input type='text' id='observation' name='observation'
-							onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCreditCard(e)}
-							required
+							onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCreditCard(e)}							
 						/>
 					</div>
 					<div>
@@ -654,7 +653,7 @@ export default function CustomerRegisterComp() {
 						<select id="creditCardBrand" name="creditCardBrand"
 							onChange={(e: ChangeEvent<HTMLSelectElement>) => updatedCreditCard(e)}
 							required
-							defaultValue={"VISA"}
+							defaultValue={"MASTERCARD"}
 						>
 							<option value="MASTERCARD">Mastercard</option>
 							<option value="VISA">Visa</option>

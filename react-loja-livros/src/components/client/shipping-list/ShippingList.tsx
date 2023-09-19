@@ -25,11 +25,15 @@ export default function ShippingList() {
     function goToCreateShipping(){
         navigate("create")
     }
+    function goBack(){
+        navigate("../")
+    }
 
     return (
         <>
             <div className="shipping-list-container">
                 <h1>Endereços de Entrega</h1>
+                <button onClick={goBack}>Voltar</button>
                 <div className="shipping-add">
                     <button onClick={goToCreateShipping}>Adicionar um endereço de entrega</button>
                 </div>

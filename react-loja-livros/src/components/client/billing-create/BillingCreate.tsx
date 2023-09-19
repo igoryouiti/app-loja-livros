@@ -69,8 +69,13 @@ export default function BillingCreate() {
 
     }
 
+    function goBack(){
+        navigate("../billings")
+    }
+
     return (
         <>
+            <button onClick={goBack}>Voltar</button>
             <form onSubmit={billingCreate}>
                 <div className="adresses-info-container">
                     <div className="address-info">
