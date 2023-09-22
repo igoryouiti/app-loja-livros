@@ -78,8 +78,4 @@ public class Book {
     @NotNull
     private PriceGroup priceGroup;
 
-
-
-
-
 }
