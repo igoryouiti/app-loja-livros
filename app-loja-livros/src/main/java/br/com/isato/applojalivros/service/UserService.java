@@ -135,7 +135,7 @@ public class UserService {
 
         if(user.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Endereço não encontrado", null);
+                    "Usuario não encontrado", null);
 
         userRepository.deleteById(id);
     }
