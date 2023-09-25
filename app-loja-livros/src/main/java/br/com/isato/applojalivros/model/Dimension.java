@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.model;
 
+import br.com.isato.applojalivros.projection.DimensionProjection;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name = "tb_dimensions")
@@ -38,6 +40,10 @@ public class Dimension {
     private Book book;
 
 
-
+    public Dimension(DimensionProjection entity){
+        BeanUtils.copyProperties(entity, this);
+        book = new Book();
+        book.setId(entity.getBookId());
+    }
 
 }

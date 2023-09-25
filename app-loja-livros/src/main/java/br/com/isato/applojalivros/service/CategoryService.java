@@ -1,8 +1,12 @@
 package br.com.isato.applojalivros.service;
 
-//import br.com.isato.applojalivros.DTO.categoryDTO.CategoryDTO;
+//import br.com.isato.applojalivros.DTO.categoryDTO.Category;
 //import br.com.isato.applojalivros.model.Book;
+import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardDTO;
+import br.com.isato.applojalivros.model.Book;
 import br.com.isato.applojalivros.model.Category;
+import br.com.isato.applojalivros.projection.CategoryProjection;
+import br.com.isato.applojalivros.projection.CreditCardProjection;
 import br.com.isato.applojalivros.repository.BookRepository;
 import br.com.isato.applojalivros.repository.CategoryRepository;
 import jakarta.validation.Valid;
@@ -23,27 +27,28 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private BookRepository customerRepository;
+    private BookRepository bookRepository;
 
     public List<Category> findAll(){
         return categoryRepository.findAll();
     }
 
-//    public Optional<CategoryDTO> searchByBook(Long id){
-//        if(id == null){
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-//                    "Deve ser passado um id válido (Long id)!", null);
-//        }
-//
-//        Optional<Book> optBook = customerRepository.findById(id);
-//
-//        if(optBook.isEmpty())
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-//                    "Deve ser passado o id cliente válido (Long id)!", null);
-//
-//        CategoryDTO categoryDTO = new CategoryDTO(categoryRepository.searchByBook(id));
-//        return Optional.of(categoryDTO);
-//    }
+    public List<Category> searchAllByBookId(Long id){
+        if(id == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Deve ser passado um id válido (Long id)!", null);
+        }
+
+        Optional<Book> optBook = bookRepository.findById(id);
+
+        if(optBook.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
+
+
+        List<CategoryProjection> categories = categoryRepository.searchAllByBook(id);
+        return categories.stream().map(Category::new).toList();
+    }
 
     public Optional<Category> findById(Long id){
         if(id == null){

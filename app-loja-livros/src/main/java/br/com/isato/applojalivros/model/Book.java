@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.model;
 
+import br.com.isato.applojalivros.DTO.bookDTO.BookMinDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class Book {
     @NotBlank
     private String isbn;
 
-    @NotBlank
+    @NotNull
     private Integer pages;
 
     @NotBlank
@@ -57,7 +59,7 @@ public class Book {
     @NotBlank
     private String barCode;
 
-    @NotBlank
+    @NotNull
     private Float rawPrice;
 
     private Float sellPrice;
@@ -77,5 +79,9 @@ public class Book {
     @Enumerated(EnumType.STRING)
     @NotNull
     private PriceGroup priceGroup;
+
+    public Book(BookMinDTO entity){
+        BeanUtils.copyProperties(entity, this);
+    }
 
 }

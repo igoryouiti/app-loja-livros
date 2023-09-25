@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.service;
 
+import br.com.isato.applojalivros.model.Book;
 import br.com.isato.applojalivros.model.Dimension;
 import br.com.isato.applojalivros.repository.BookRepository;
 import br.com.isato.applojalivros.repository.DimensionRepository;
@@ -32,6 +33,22 @@ public class DimensionService {
                     "Deve ser passado um id válido (Long id)!", null);
         }
         return dimensionRepository.findById(id);
+    }
+
+    public Optional<Dimension> searchByBook(Long id){
+        if(id == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Deve ser passado um id válido (Long id)!", null);
+        }
+
+        Optional<Book> optBook = bookRepository.findById(id);
+
+        if(optBook.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
+
+        Dimension dimension = new Dimension(dimensionRepository.searchByBook(id));
+        return Optional.of(dimension);
     }
 
     public Optional<Dimension> create(@Valid Dimension dimension){

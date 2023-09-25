@@ -1,11 +1,13 @@
 package br.com.isato.applojalivros.model;
 
+import br.com.isato.applojalivros.projection.CategoryProjection;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name = "tb_categories")
@@ -26,5 +28,11 @@ public class Category {
     @JoinColumn(name = "fk_book_id", referencedColumnName = "id")
     @JsonIgnoreProperties("categories")
     private Book book;
+
+    public Category(CategoryProjection entity){
+        BeanUtils.copyProperties(entity, this);
+        book = new Book();
+        book.setId(entity.getBookId());
+    }
 
 }

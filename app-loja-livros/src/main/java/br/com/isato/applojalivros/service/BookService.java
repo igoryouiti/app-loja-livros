@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.service;
 
+import br.com.isato.applojalivros.DTO.bookDTO.BookMinDTO;
 import br.com.isato.applojalivros.model.Book;
 import br.com.isato.applojalivros.model.Category;
 import br.com.isato.applojalivros.model.ReasonActivationChange;
@@ -76,14 +77,15 @@ public class BookService {
         return optCreatedBook;
     }
 
-    public Optional<Book> update(Book book){
+    public Optional<Book> update(BookMinDTO bookMinDTO){
 
-        Optional<Book> optBook = findById(book.getId());
+        Optional<Book> optBook = findById(bookMinDTO.getId());
 
         if(optBook.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve conter id de um livro válido");
 
+        Book book = new Book(bookMinDTO);
 
         return Optional.of(bookRepository.save(book));
     }
@@ -104,7 +106,9 @@ public class BookService {
 
         optBook.get().setActive(false);
 
-        Optional<Book> optUpdatedBook = update(optBook.get());
+        BookMinDTO bookMinDTO = new BookMinDTO(optBook.get());
+
+        Optional<Book> optUpdatedBook = update(bookMinDTO);
 
         if(optUpdatedBook.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -116,9 +120,9 @@ public class BookService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro no update da Justificativa", null);
 
-        optBook.get().setReasonActivationChange(optUpdatedReason.get());
+        optUpdatedBook.get().setReasonActivationChange(optUpdatedReason.get());
 
-        return optBook;
+        return optUpdatedBook;
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -137,7 +141,9 @@ public class BookService {
 
         optBook.get().setActive(true);
 
-        Optional<Book> optUpdatedBook = update(optBook.get());
+        BookMinDTO bookMinDTO = new BookMinDTO(optBook.get());
+
+        Optional<Book> optUpdatedBook = update(bookMinDTO);
 
         if(optUpdatedBook.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
