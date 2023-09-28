@@ -92,6 +92,11 @@ public class BookController {
         return ResponseEntity.ok(categoryService.searchAllByBookId(id));
     }
 
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getAllCategories(){
+        return ResponseEntity.ok(categoryService.findAll());
+    }
+
     @PostMapping("/categories")
     public ResponseEntity<Category> postCategory(@RequestBody Category category){
         return categoryService.create(category)

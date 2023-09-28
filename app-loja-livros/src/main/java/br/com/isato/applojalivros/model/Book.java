@@ -64,15 +64,15 @@ public class Book {
 
     private Float sellPrice;
 
-    @OneToMany (mappedBy = "book", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "book")
     private List<Category> categories;
 
-    @OneToOne(mappedBy = "book")
+    @OneToOne(mappedBy = "book", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "book")
     private Dimension dimension;
 
-    @OneToOne(mappedBy = "book")
+    @OneToOne(mappedBy = "book", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "book")
     private ReasonActivationChange reasonActivationChange;
 
