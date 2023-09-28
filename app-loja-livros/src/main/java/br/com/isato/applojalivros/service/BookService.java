@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.DTO.bookDTO.BookMinDTO;
+import br.com.isato.applojalivros.DTO.reasonActivationChangeDTO.ReasonActivationChangeUpdateDTO;
 import br.com.isato.applojalivros.model.Book;
 import br.com.isato.applojalivros.model.Category;
 import br.com.isato.applojalivros.model.ReasonActivationChange;
@@ -90,15 +91,11 @@ public class BookService {
         return Optional.of(bookRepository.save(book));
     }
 
+
     @Transactional(rollbackOn = Exception.class)
-    public Optional<Book> inactivateBook(ReasonActivationChange reason){
+    public Optional<Book> inactivateBook(ReasonActivationChangeUpdateDTO reasonActivationChangeDTO ){
 
-        Optional<ReasonActivationChange> optReason = reasonActivationChangeService.findById(reason.getId());
-        if(optReason.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Justificativa não encontrada", null);
-
-        Optional<Book> optBook = bookRepository.findById(reason.getBook().getId());
+        Optional<Book> optBook = bookRepository.findById(reasonActivationChangeDTO.getBook().getId());
 
         if(optBook.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -114,6 +111,8 @@ public class BookService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro no update do livro", null);
 
+        ReasonActivationChange reason = new ReasonActivationChange(reasonActivationChangeDTO);
+
         Optional<ReasonActivationChange> optUpdatedReason = reasonActivationChangeService.update(reason);
 
         if(optUpdatedReason.isEmpty())
@@ -126,14 +125,9 @@ public class BookService {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public Optional<Book> activateBook(ReasonActivationChange reason){
+    public Optional<Book> activateBook(ReasonActivationChangeUpdateDTO reasonActivationChangeDTO ){
 
-        Optional<ReasonActivationChange> optReason = reasonActivationChangeService.findById(reason.getId());
-        if(optReason.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Justificativa não encontrada", null);
-
-        Optional<Book> optBook = bookRepository.findById(reason.getBook().getId());
+        Optional<Book> optBook = bookRepository.findById(reasonActivationChangeDTO.getBook().getId());
 
         if(optBook.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -149,15 +143,17 @@ public class BookService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro no update do livro", null);
 
+        ReasonActivationChange reason = new ReasonActivationChange(reasonActivationChangeDTO);
+
         Optional<ReasonActivationChange> optUpdatedReason = reasonActivationChangeService.update(reason);
 
         if(optUpdatedReason.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro no update da Justificativa", null);
 
-        optBook.get().setReasonActivationChange(optUpdatedReason.get());
+        optUpdatedBook.get().setReasonActivationChange(optUpdatedReason.get());
 
-        return optBook;
+        return optUpdatedBook;
     }
 
     public void deleteById(Long id){

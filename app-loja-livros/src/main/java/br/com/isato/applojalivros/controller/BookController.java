@@ -1,7 +1,9 @@
 package br.com.isato.applojalivros.controller;
 
 import br.com.isato.applojalivros.DTO.bookDTO.BookMinDTO;
+import br.com.isato.applojalivros.DTO.reasonActivationChangeDTO.ReasonActivationChangeUpdateDTO;
 import br.com.isato.applojalivros.model.*;
+import br.com.isato.applojalivros.repository.ReasonActivationChangeRepository;
 import br.com.isato.applojalivros.service.BookService;
 import br.com.isato.applojalivros.service.CategoryService;
 import br.com.isato.applojalivros.service.DimensionService;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -26,6 +29,8 @@ public class BookController {
     private DimensionService dimensionService;
     @Autowired
     private ReasonActivationChangeService reasonActivationChangeService;
+    @Autowired
+    private ReasonActivationChangeRepository reasonActivationChangeRepository;
 
 
     @GetMapping
@@ -55,15 +60,16 @@ public class BookController {
     }
 
     @PutMapping("/inactivate")
-    public ResponseEntity<Book> inactivateBook (@RequestBody ReasonActivationChange reasonActivationChange){
-        return bookService.inactivateBook(reasonActivationChange)
+    public ResponseEntity<Book> inactivateBook (@RequestBody ReasonActivationChangeUpdateDTO reasonActivationChangeDTO){
+        return bookService.inactivateBook(reasonActivationChangeDTO)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+
     @PutMapping("/activate")
-    public ResponseEntity<Book> activateBook (@RequestBody ReasonActivationChange reasonActivationChange){
-        return bookService.activateBook(reasonActivationChange)
+    public ResponseEntity<Book> activateBook (@RequestBody ReasonActivationChangeUpdateDTO reasonActivationChangeDTO){
+        return bookService.activateBook(reasonActivationChangeDTO)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

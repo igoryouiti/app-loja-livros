@@ -44,6 +44,7 @@ public class ReasonActivationChangeService {
         return Optional.of(reasonActivationChangeRepository.save(reasonActivationChange));
     }
 
+
     public Optional<ReasonActivationChange> update(ReasonActivationChange reasonActivationChange){
 
         if(reasonActivationChange.getId() == null){
@@ -57,16 +58,15 @@ public class ReasonActivationChangeService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Justificativa de Troca de status não encontrada", null);
 
-        reasonActivationChange.setBook(optReason.get().getBook());
-
         if(reasonActivationChange.getBook().getId() == null || reasonActivationChange.getBook().getId().equals(""))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Deve conter id do Book");
 
         if(optReason.get().getBook().getId() != reasonActivationChange.getBook().getId())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "O id do Book deve ser o mesmo salvo no banco");
+                    "O id do Book deve ser o mesmo relacionado a razão");
 
+        reasonActivationChange.setBook(optReason.get().getBook());
 
         return Optional.of(reasonActivationChangeRepository.save(reasonActivationChange));
     }
