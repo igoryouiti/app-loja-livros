@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_categories")
 @Getter
@@ -24,15 +27,14 @@ public class Category {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_book_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("categories")
-    private Book book;
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnoreProperties(value = "categories")
+    private Set<Book> books;
 
     public Category(CategoryProjection entity){
         BeanUtils.copyProperties(entity, this);
-        book = new Book();
-        book.setId(entity.getBookId());
+        books = new HashSet<Book>();
+        books.add(new Book(entity.getBookId()));
     }
 
 }

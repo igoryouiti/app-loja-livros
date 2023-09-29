@@ -14,9 +14,11 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(nativeQuery = true, value = """
             SELECT c.id AS id,
                    c.description,
-                   c.fk_book_id AS bookId
+                   bc.book_id AS bookId
             FROM tb_categories c
-            WHERE c.fk_book_id = :bookId
+            JOIN books_categories bc ON c.id = bc.category_id
+                    WHERE bc.book_id = :bookId
              """)
     public List<CategoryProjection> searchAllByBook(Long bookId);
 }
+

@@ -59,10 +59,6 @@ public class CategoryService {
     }
 
     public Optional<Category> create(@Valid Category category){
-        if(category.getBook().getId() == null || category.getBook().getId().equals(""))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Deve conter id do Book");
-
 
         return Optional.of(categoryRepository.save(category));
     }
@@ -74,13 +70,6 @@ public class CategoryService {
         if(optCategory.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Deve conter id de um livro válido");
-
-        category.setBook(optCategory.get().getBook());
-
-        if(category.getBook().getId() == null || category.getBook().getId().equals(""))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Deve conter id do Book");
-
 
         return Optional.of(categoryRepository.save(category));
     }

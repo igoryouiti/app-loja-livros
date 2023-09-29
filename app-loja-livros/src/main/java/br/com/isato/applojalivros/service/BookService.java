@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,21 +47,24 @@ public class BookService {
     @Transactional(rollbackOn = Exception.class)
     public Optional<Book> create(Book book){
 
-        Optional<Book> optCreatedBook = Optional.of(bookRepository.save(book));
+        if(book.getCategories().isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Categorias não pode ser vazia ou nula");
 
         book.getCategories().forEach(category -> {
-            category.setBook(optCreatedBook.get());
+            if(category.getId() == null)
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "As categorias devem possuir um id válido");
         });
 
-        List<Optional<Category>> createdCategories = book.getCategories().stream()
-                .map(category -> categoryService.create(category))
-                .collect(Collectors.toList());
-
-        for (Optional<Category> optionalCategory : createdCategories) {
-            if (optionalCategory.isEmpty())
+        book.getCategories().forEach(category -> {
+            if(categoryService.findById(category.getId()).isEmpty())
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        "Erro na criação de categoria");
-        }
+                        "As categorias devem possuir um id válido");
+        });
+
+        Optional<Book> optCreatedBook = Optional.of(bookRepository.save(book));
+
 
         book.getDimension().setBook(optCreatedBook.get());
         if(dimensionService.create(book.getDimension()).isEmpty())

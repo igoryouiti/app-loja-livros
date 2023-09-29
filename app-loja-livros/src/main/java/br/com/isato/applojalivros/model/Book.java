@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_books")
@@ -64,9 +65,13 @@ public class Book {
 
     private Float sellPrice;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties(value = "book")
-    private List<Category> categories;
+    @ManyToMany
+    @JoinTable(
+            name = "books_categories",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JsonIgnoreProperties(value = "books")
+    private Set<Category> categories;
 
     @OneToOne(mappedBy = "book", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "book")
@@ -82,6 +87,10 @@ public class Book {
 
     public Book(BookMinDTO entity){
         BeanUtils.copyProperties(entity, this);
+    }
+
+    public Book(Long bookId){
+        this.id = bookId;
     }
 
 }
