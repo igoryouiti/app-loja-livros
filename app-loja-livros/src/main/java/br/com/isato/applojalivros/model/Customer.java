@@ -70,6 +70,10 @@ public class Customer {
     @JsonIgnoreProperties(value = "customer")
     private List<CreditCard> creditCards;
 
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "customer")
+    private List<TradeCoupon> tradeCoupons;
+
     public Customer(CreateCustomerDTO entity){
         BeanUtils.copyProperties(entity, this);
     }
