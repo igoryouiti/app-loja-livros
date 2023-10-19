@@ -15,10 +15,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Address extends AbstractAddress{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "Address")

@@ -15,10 +15,6 @@ import lombok.Setter;
 @Table(name = "tb_billing_address")
 public class BillingAddress extends AbstractAddress{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties("billingAddresses")
