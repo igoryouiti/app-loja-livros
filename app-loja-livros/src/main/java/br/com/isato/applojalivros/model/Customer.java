@@ -43,6 +43,8 @@ public class Customer {
     @Size(min = 11, max = 11, message = "O CPF deve conter 11 caracteres numéricos")
     private String cpf;
 
+    private Integer ranking;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "customer")
