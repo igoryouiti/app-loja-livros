@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.BeanUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -65,6 +66,11 @@ public class Book {
 
     private Float sellPrice;
 
+//    @NotNull
+//    private BigDecimal rawPrice;
+//
+//    private BigDecimal sellPrice;
+
     @ManyToMany
     @JoinTable(
             name = "books_categories",
@@ -80,6 +86,10 @@ public class Book {
     @OneToOne(mappedBy = "book", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "book")
     private ReasonActivationChange reasonActivationChange;
+
+    @ManyToMany(mappedBy = "books")
+    @JsonIgnoreProperties(value = "books")
+    private Set<Item> items;
 
     @Enumerated(EnumType.STRING)
     @NotNull
