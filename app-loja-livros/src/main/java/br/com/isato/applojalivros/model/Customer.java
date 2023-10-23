@@ -74,6 +74,11 @@ public class Customer {
     @JsonIgnoreProperties(value = "customer")
     private List<TradeCoupon> tradeCoupons;
 
+
+    @OneToOne(mappedBy = "customer")
+    @JsonIgnoreProperties(value = "customer")
+    private Chart chart;
+
     public Customer(CreateCustomerDTO entity){
         BeanUtils.copyProperties(entity, this);
     }

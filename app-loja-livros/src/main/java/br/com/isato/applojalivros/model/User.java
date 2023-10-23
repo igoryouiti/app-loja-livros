@@ -38,7 +38,7 @@ public class User {
 
 
     @OneToOne(mappedBy = "user")
-    @JsonIgnoreProperties(value = "customer")
+    @JsonIgnoreProperties(value = "user")
     private Customer customer;
 
 

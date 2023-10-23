@@ -1,18 +1,39 @@
 package br.com.isato.applojalivros.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Table(name = "tb_chart_items")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChartItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Integer quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_chart_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("chartItems")
+    private Chart chart;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_item_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("chartItems")
+    private Item item;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_book_stocks_temp_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("chartItems")
+    private BookStockTemp bookStockTemp;
 
 }
