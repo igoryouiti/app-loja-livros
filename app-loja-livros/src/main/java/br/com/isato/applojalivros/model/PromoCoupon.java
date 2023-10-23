@@ -1,7 +1,7 @@
 package br.com.isato.applojalivros.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_promo_coupons")
@@ -24,5 +25,11 @@ public class PromoCoupon extends AbstractCoupon{
 
     @NotBlank
     private String secret;
+
+
+
+    @OneToMany(mappedBy = "promoCoupon", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "promoCoupon")
+    private List<PromoCouponPayment> promoCouponPayments;
 
 }

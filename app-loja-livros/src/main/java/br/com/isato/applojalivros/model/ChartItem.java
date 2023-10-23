@@ -36,4 +36,9 @@ public class ChartItem {
     @JsonIgnoreProperties("chartItems")
     private BookStockTemp bookStockTemp;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_transaction_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("chartItems")
+    private Transaction transaction;
+
 }

@@ -79,6 +79,10 @@ public class Customer {
     @JsonIgnoreProperties(value = "customer")
     private Chart chart;
 
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "customer")
+    private List<Transaction> transactions;
+
     public Customer(CreateCustomerDTO entity){
         BeanUtils.copyProperties(entity, this);
     }
