@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_payment_methods")
@@ -31,5 +32,9 @@ public class PaymentMethod {
     @OneToOne(mappedBy = "paymentMethod")
     @JsonIgnoreProperties(value = "paymentMethod")
     private PromoCouponPayment promoCouponPayment;
+
+    @OneToMany (mappedBy = "paymentMethod", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "paymentMethod")
+    private List<TradeCouponPayment> tradeCouponPayments;
 
 }

@@ -22,4 +22,10 @@ public class TradeCoupon extends AbstractCoupon{
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties("tradeCoupons")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_trade_coupon_payments_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("tradeCoupons")
+    private TradeCouponPayment tradeCouponPayment;
+
 }

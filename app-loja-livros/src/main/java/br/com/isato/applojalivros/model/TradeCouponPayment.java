@@ -10,21 +10,23 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_promo_coupon_payments")
+@Table(name = "tb_trade_coupon_payments")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PromoCouponPayment extends AbstractPayment{
+public class TradeCouponPayment extends AbstractPayment{
+
+    @OneToMany (mappedBy = "tradeCouponPayment", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "tradeCouponPayment")
+    private List<TradeCoupon> tradeCoupons;
+
 
     @ManyToOne
-    @JoinColumn(name = "fk_promo_coupons_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("promoCouponPayments")
-    private PromoCoupon promoCoupon;
-
-    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_payment_method_id", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = "promoCouponPayment")
+    @JsonIgnoreProperties("tradeCouponPayments")
     private PaymentMethod paymentMethod;
+
+
 
 }
