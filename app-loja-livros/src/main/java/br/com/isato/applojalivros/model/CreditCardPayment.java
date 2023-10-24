@@ -17,9 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CreditCardPayment extends AbstractPayment{
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fk_credit_card_id", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = "creditCardPayment")
+    @JsonIgnoreProperties("creditCardPayments")
     private CreditCard creditCard;
 
     @ManyToOne

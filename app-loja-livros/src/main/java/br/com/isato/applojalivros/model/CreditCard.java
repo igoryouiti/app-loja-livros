@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_credit_card")
 @Getter
@@ -52,8 +54,8 @@ public class CreditCard {
     @JsonIgnoreProperties("creditCards")
     private Customer customer;
 
-    @OneToOne(mappedBy = "creditCard")
+    @OneToMany (mappedBy = "creditCard")
     @JsonIgnoreProperties(value = "creditCard")
-    private CreditCardPayment creditCardPayment;
+    private List<CreditCardPayment> creditCardPayments;
 
 }
