@@ -37,4 +37,8 @@ public class PaymentMethod {
     @JsonIgnoreProperties(value = "paymentMethod")
     private List<TradeCouponPayment> tradeCouponPayments;
 
+    @OneToMany (mappedBy = "paymentMethod", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "paymentMethod")
+    private List<CreditCardPayment> creditCardPayments;
+
 }

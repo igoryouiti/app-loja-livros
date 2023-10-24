@@ -52,4 +52,8 @@ public class CreditCard {
     @JsonIgnoreProperties("creditCards")
     private Customer customer;
 
+    @OneToOne(mappedBy = "creditCard")
+    @JsonIgnoreProperties(value = "creditCard")
+    private CreditCardPayment creditCardPayment;
+
 }

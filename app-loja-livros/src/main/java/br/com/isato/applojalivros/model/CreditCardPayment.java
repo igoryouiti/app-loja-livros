@@ -10,24 +10,21 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_trade_coupon_payments")
+@Table(name = "tb_credit_card_payments")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TradeCouponPayment extends AbstractPayment{
+public class CreditCardPayment extends AbstractPayment{
 
     @OneToOne
-    @JoinColumn(name = "fk_trade_coupon_payment_id", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = "tradeCouponPayment")
-    private TradeCoupon tradeCoupon;
-
+    @JoinColumn(name = "fk_credit_card_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = "creditCardPayment")
+    private CreditCard creditCard;
 
     @ManyToOne
     @JoinColumn(name = "fk_payment_method_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("tradeCouponPayments")
+    @JsonIgnoreProperties("creditCardPayments")
     private PaymentMethod paymentMethod;
-
-
 
 }
