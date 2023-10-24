@@ -1,13 +1,10 @@
 package br.com.isato.applojalivros.service;
 
-import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
 import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressDTO;
 import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressMinDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCep;
-import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.ShippingAddress;
-import br.com.isato.applojalivros.projection.BillingAddressProjection;
 import br.com.isato.applojalivros.projection.ShippingAddressProjection;
 import br.com.isato.applojalivros.repository.CustomerRepository;
 import br.com.isato.applojalivros.repository.ShippingAddressRepository;

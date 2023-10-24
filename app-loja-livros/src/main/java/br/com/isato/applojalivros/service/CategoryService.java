@@ -2,11 +2,9 @@ package br.com.isato.applojalivros.service;
 
 //import br.com.isato.applojalivros.DTO.categoryDTO.Category;
 //import br.com.isato.applojalivros.model.Book;
-import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardDTO;
 import br.com.isato.applojalivros.model.Book;
 import br.com.isato.applojalivros.model.Category;
 import br.com.isato.applojalivros.projection.CategoryProjection;
-import br.com.isato.applojalivros.projection.CreditCardProjection;
 import br.com.isato.applojalivros.repository.BookRepository;
 import br.com.isato.applojalivros.repository.CategoryRepository;
 import jakarta.validation.Valid;

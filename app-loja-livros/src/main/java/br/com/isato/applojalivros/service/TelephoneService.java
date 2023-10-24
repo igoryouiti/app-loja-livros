@@ -1,13 +1,11 @@
 package br.com.isato.applojalivros.service;
 
-import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardDTO;
 import br.com.isato.applojalivros.DTO.telephoneDTO.TelephoneDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorDdd;
 import br.com.isato.applojalivros.business.validator.ValidadorTelephone;
 import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.Telephone;
-import br.com.isato.applojalivros.projection.TelephoneProjection;
 import br.com.isato.applojalivros.repository.CustomerRepository;
 import br.com.isato.applojalivros.repository.TelephoneRepository;
 import jakarta.validation.Valid;

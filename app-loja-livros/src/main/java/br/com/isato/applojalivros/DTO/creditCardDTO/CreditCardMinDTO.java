@@ -2,8 +2,6 @@ package br.com.isato.applojalivros.DTO.creditCardDTO;
 
 import br.com.isato.applojalivros.model.CreditCard;
 import br.com.isato.applojalivros.model.CreditCardBrand;
-import br.com.isato.applojalivros.model.Customer;
-import br.com.isato.applojalivros.projection.CreditCardProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,8 @@ import org.springframework.beans.BeanUtils;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditCardMinDTO {
+public class
+CreditCardMinDTO {
 
     private Long id;
 

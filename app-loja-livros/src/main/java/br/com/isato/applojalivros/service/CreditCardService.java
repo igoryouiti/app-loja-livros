@@ -2,14 +2,12 @@ package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardDTO;
 import br.com.isato.applojalivros.DTO.creditCardDTO.CreditCardMinDTO;
-import br.com.isato.applojalivros.DTO.shippingAddressDTO.ShippingAddressDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCardNumber;
 import br.com.isato.applojalivros.business.validator.ValidadorCvv;
 import br.com.isato.applojalivros.model.CreditCard;
 import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.projection.CreditCardProjection;
-import br.com.isato.applojalivros.projection.ShippingAddressProjection;
 import br.com.isato.applojalivros.repository.CreditCardRepository;
 import br.com.isato.applojalivros.repository.CustomerRepository;
 import jakarta.validation.Valid;
