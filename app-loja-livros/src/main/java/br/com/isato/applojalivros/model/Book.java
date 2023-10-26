@@ -61,15 +61,15 @@ public class Book {
     @NotBlank
     private String barCode;
 
-    @NotNull
-    private Float rawPrice;
-
-    private Float sellPrice;
-
 //    @NotNull
-//    private BigDecimal rawPrice;
+//    private Float rawPrice;
 //
-//    private BigDecimal sellPrice;
+//    private Float sellPrice;
+
+    @NotNull
+    private BigDecimal rawPrice;
+
+    private BigDecimal sellPrice;
 
     @ManyToMany
     @JoinTable(
@@ -103,4 +103,7 @@ public class Book {
         this.id = bookId;
     }
 
+    public Book(Book book) {
+        BeanUtils.copyProperties(book, this);
+    }
 }
