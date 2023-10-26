@@ -50,6 +50,10 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/books/**", HttpMethod.POST.toString())).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/books/**", HttpMethod.PUT.toString())).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/books/**", HttpMethod.DELETE.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/inventory/**", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/inventory/**", HttpMethod.POST.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/inventory/**", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/inventory/**", HttpMethod.DELETE.toString())).permitAll()
                         .anyRequest().authenticated()
                 )
 
