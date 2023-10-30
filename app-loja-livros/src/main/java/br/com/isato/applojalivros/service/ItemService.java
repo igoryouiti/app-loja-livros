@@ -61,7 +61,7 @@ public class ItemService {
 
         if(!itemRepository.existsById(item.getId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "O item devepossuir um id válido");
+                    "O item deve possuir um id válido");
 
         List<Book> books = item.getBooks().stream().map(Book::new).toList();
 
@@ -95,6 +95,19 @@ public class ItemService {
 
         return Optional.of(itemRepository.save(optItem.get()));
     }
+
+//    public Optional<Item> updateStockItem(@Valid Item item){
+//
+//        Optional<Item> optItem = findById(item.getId());
+//
+//        if(optItem.isEmpty())
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+//                    "O item deve possuir um id válido");
+//
+//        optItem.get().getBookStock().setId(item.getBookStock().getId());
+//
+//        return Optional.of(itemRepository.save(optItem.get()));
+//    }
 
     public void deleteById(Long id){
         itemRepository.deleteById(id);

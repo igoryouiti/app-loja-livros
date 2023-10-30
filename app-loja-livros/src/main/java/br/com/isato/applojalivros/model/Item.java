@@ -19,9 +19,13 @@ public class Item extends AbstractItem{
     @JsonIgnoreProperties(value = "item")
     private List<ChartItem> chartItems;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_book_stocks_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("items")
+//    @ManyToOne
+//    @JoinColumn(name = "fk_book_stocks_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties("items")
+//    private BookStock bookStock;
+
+    @OneToOne(mappedBy = "item")
+    @JsonIgnoreProperties(value = "item")
     private BookStock bookStock;
 
 }
