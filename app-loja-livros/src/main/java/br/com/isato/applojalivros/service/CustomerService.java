@@ -4,6 +4,7 @@ import br.com.isato.applojalivros.DTO.customerDTO.CreateCustomerDTO;
 import br.com.isato.applojalivros.DTO.customerDTO.UpdateCustomerDTO;
 import br.com.isato.applojalivros.business.validator.IValidator;
 import br.com.isato.applojalivros.business.validator.ValidadorCpf;
+import br.com.isato.applojalivros.model.Chart;
 import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.User;
 import br.com.isato.applojalivros.repository.CustomerRepository;
@@ -36,6 +37,9 @@ public class CustomerService {
     private TelephoneService telephoneService;
     @Autowired
     private CreditCardService creditCardService;
+
+    @Autowired
+    private ChartService chartService;
     IValidator validator;
 
     public List<Customer> findAll(){
@@ -101,6 +105,14 @@ public class CustomerService {
         if(creditCardService.create(createCustomerDTO.getCreditCards()).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de cartao de credito");
+
+        createCustomerDTO.setChart(new Chart());
+
+        createCustomerDTO.getChart().setCustomer(optCreatedCustomer.get());
+        if(chartService.create(createCustomerDTO.getChart()).isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Erro na criação de carrinho");
+
 
         return optCreatedCustomer;
     }

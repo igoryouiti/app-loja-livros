@@ -39,6 +39,7 @@ public class CustomerController {
     @Autowired
     private CreditCardService creditCardService;
 
+
     @GetMapping
     public ResponseEntity<List<Customer>> getAll(){
         return ResponseEntity.ok(customerService.findAll());

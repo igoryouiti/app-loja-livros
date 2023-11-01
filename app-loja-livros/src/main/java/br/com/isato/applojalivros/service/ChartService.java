@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.service;
 
+import br.com.isato.applojalivros.DTO.chartDTO.ChartDTO;
 import br.com.isato.applojalivros.model.Chart;
 import br.com.isato.applojalivros.repository.ChartRepository;
 import jakarta.validation.Valid;
@@ -29,7 +30,20 @@ public class ChartService {
         return chartRepository.findById(id);
     }
 
+    public Optional<ChartDTO> findChartByCustomer(Long customerId){
+        if(customerId == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Deve ser passado um id de cliente válido (Long id)!", null);
+
+        ChartDTO chartDTO = new ChartDTO(chartRepository.searchByCustomer(customerId));
+
+        return Optional.of(chartDTO);
+    }
+
     public Optional<Chart> create(@Valid Chart chart){
+
+
+
         return Optional.of(chartRepository.save(chart));
     }
 

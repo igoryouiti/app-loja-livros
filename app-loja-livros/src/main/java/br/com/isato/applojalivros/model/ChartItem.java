@@ -2,10 +2,7 @@ package br.com.isato.applojalivros.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_chart_items")
@@ -13,6 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ChartItem {
 
     @Id
@@ -36,9 +34,9 @@ public class ChartItem {
     @JsonIgnoreProperties("chartItems")
     private BookStockTemp bookStockTemp;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_transaction_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("chartItems")
-    private Transaction transaction;
+//    @ManyToOne
+//    @JoinColumn(name = "fk_transaction_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties("chartItems")
+//    private Transaction transaction;
 
 }

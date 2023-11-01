@@ -51,4 +51,6 @@ public class CreateCustomerDTO {
 
     @NotNull
     private CreditCard creditCards;
+
+    private Chart chart;
 }
