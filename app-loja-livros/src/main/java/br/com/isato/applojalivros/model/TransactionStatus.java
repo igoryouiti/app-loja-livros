@@ -3,13 +3,14 @@ package br.com.isato.applojalivros.model;
 public enum TransactionStatus {
 
     EM_PROCESSAMENTO("em_processamento"),
-    EM_TRANSPORTE("em_transporte"),
+    PEDIDO_APROVADO("pedido_aprovado"),
+    PAGAMENTO_RECUSADO("pagamento_recusado"),
+    EM_TRANSITO("em_transito"),
     ENTREGUE("entregue"),
-    EM_TROCA("em_troca"),
-    TROCA_AUTORIZADA("troca_autorizada"),
-    APROVADA("aprovada"),
-    REPROVADA("reprovada"),
-    TROCADA("trocada");
+    TROCA_SOLICITADA("troca_solicitada"),
+    TROCA_APROVADA("troca_aprovada"),
+    TROCA_REPROVADA("troca_reprovada"),
+    TROCA_REALIZADA("troca_realizada");
 
 
     private final String displayName;

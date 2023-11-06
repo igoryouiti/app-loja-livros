@@ -37,9 +37,9 @@ public class Transaction {
     @JsonIgnoreProperties("transactions")
     private Customer customer;
 
-//    @OneToMany (mappedBy = "transaction", cascade = CascadeType.REMOVE)
-//    @JsonIgnoreProperties(value = "transaction")
-//    private List<ChartItem> chartItems;
+    @OneToMany (mappedBy = "transaction", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = "transaction")
+    private List<TransactionItem> transactionItems;
 
     @OneToOne(mappedBy = "transaction")
     @JsonIgnoreProperties(value = "transaction")
