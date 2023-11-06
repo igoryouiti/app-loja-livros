@@ -56,6 +56,13 @@ public class CouponManagementController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @PutMapping("/trade-coupon/active-status-change/{id}")
+    public ResponseEntity<TradeCoupon> updateTradeCouponActive(@PathVariable Long id){
+        return tradeCouponService.changeActiveStatus(id)
+                .map(response -> ResponseEntity.ok(response))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
     @DeleteMapping("/trade-coupon/{id}")
     public ResponseEntity deleteTradeCoupon(@PathVariable Long id) {
         tradeCouponService.deleteById(id);
@@ -89,6 +96,12 @@ public class CouponManagementController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @PutMapping("/promo-coupon/active-status-change/{id}")
+    public ResponseEntity<PromoCoupon> updatePromoCouponActive(@PathVariable Long id){
+        return promoCouponService.changeActiveStatus(id)
+                .map(response -> ResponseEntity.ok(response))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
     @DeleteMapping("/promo-coupon/{id}")
     public ResponseEntity deletePromoCoupon(@PathVariable Long id) {
         promoCouponService.deleteById(id);

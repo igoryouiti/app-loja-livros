@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.model.PromoCoupon;
+import br.com.isato.applojalivros.model.TradeCoupon;
 import br.com.isato.applojalivros.repository.PromoCouponRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,20 @@ public class PromoCouponService {
 
     public Optional<PromoCoupon> update(@Valid PromoCoupon promoCoupon){
         return Optional.of(promoCouponRepository.save(promoCoupon));
+    }
+
+    public Optional<PromoCoupon> changeActiveStatus(Long promoCouponId){
+
+        Optional<PromoCoupon> optPromoCoupon = findById(promoCouponId);
+
+        if(optPromoCoupon.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id de um cupom de promoção válido (Long id)!", null);
+
+        optPromoCoupon.get().setActive(!optPromoCoupon.get().getActive());
+
+
+        return Optional.of(promoCouponRepository.save(optPromoCoupon.get()));
     }
 
     public void deleteById(Long id){

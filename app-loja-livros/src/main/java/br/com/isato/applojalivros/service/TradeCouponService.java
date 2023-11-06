@@ -68,6 +68,20 @@ public class TradeCouponService {
         return Optional.of(tradeCouponRepository.save(tradeCoupon));
     }
 
+    public Optional<TradeCoupon> changeActiveStatus(Long tradeCouponId){
+
+        Optional<TradeCoupon> optTradeCoupon = findById(tradeCouponId);
+
+        if(optTradeCoupon.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Deve ser passado o id cliente válido (Long id)!", null);
+
+        optTradeCoupon.get().setActive(!optTradeCoupon.get().getActive());
+
+
+        return Optional.of(tradeCouponRepository.save(optTradeCoupon.get()));
+    }
+
     public void deleteById(Long id){
         tradeCouponRepository.deleteById(id);
     }
