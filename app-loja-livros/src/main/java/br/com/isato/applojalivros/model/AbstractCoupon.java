@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @MappedSuperclass
@@ -21,9 +22,9 @@ public abstract class AbstractCoupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private LocalDate createdData;
+    private LocalDate createdDate;
     @NotNull
-    private Double value;
+    private BigDecimal value;
     @NotNull
     private Boolean active;
     @NotBlank

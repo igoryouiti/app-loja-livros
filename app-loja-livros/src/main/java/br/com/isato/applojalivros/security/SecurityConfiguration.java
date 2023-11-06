@@ -58,6 +58,10 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/chart-inventory/**", HttpMethod.POST.toString())).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/chart-inventory/**", HttpMethod.PUT.toString())).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/chart-inventory/**", HttpMethod.DELETE.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/coupon-management/**", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/coupon-management/**", HttpMethod.POST.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/coupon-management/**", HttpMethod.PUT.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/coupon-management/**", HttpMethod.DELETE.toString())).permitAll()
                         .anyRequest().authenticated()
                 )
 
