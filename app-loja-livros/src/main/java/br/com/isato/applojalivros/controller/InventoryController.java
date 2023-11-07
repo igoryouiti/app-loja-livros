@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.controller;
 
 import br.com.isato.applojalivros.DTO.bookStockDTO.BookStockQuantityDTO;
+import br.com.isato.applojalivros.DTO.bookStockDTO.CreateBookStockDTO;
 import br.com.isato.applojalivros.model.Book;
 import br.com.isato.applojalivros.model.BookStock;
 import br.com.isato.applojalivros.model.Item;
@@ -62,6 +63,8 @@ public class InventoryController {
         return ResponseEntity.noContent().build();
     }
 
+    // Stock
+
     @GetMapping("/stock")
     public ResponseEntity<List<BookStock>> getAllBookStock(){
         return ResponseEntity.ok(bookStockService.findAll());
@@ -75,8 +78,8 @@ public class InventoryController {
     }
 
     @PostMapping("/stock")
-    public ResponseEntity<BookStock> postStock(@RequestBody BookStock bookStock){
-        return bookStockService.create(bookStock)
+    public ResponseEntity<BookStock> postStock(@RequestBody CreateBookStockDTO createBookStockDTO){
+        return bookStockService.create(createBookStockDTO)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
