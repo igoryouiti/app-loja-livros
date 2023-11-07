@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.controller;
 
+import br.com.isato.applojalivros.DTO.tradeCouponDTO.CreateTradeCouponDTO;
 import br.com.isato.applojalivros.DTO.tradeCouponDTO.TradeCouponDTO;
 import br.com.isato.applojalivros.model.BillingAddress;
 import br.com.isato.applojalivros.model.PromoCoupon;
@@ -43,8 +44,8 @@ public class CouponManagementController {
     }
 
     @PostMapping("/trade-coupon")
-    public ResponseEntity<TradeCoupon> createTradeCoupon(@RequestBody TradeCoupon tradeCoupon){
-        return tradeCouponService.create(tradeCoupon)
+    public ResponseEntity<TradeCoupon> createTradeCoupon(@RequestBody CreateTradeCouponDTO createTradeCouponDTO){
+        return tradeCouponService.create(createTradeCouponDTO)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

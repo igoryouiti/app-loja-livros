@@ -1,7 +1,9 @@
 package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.DTO.billingAddressDTO.BillingAddressDTO;
+import br.com.isato.applojalivros.DTO.customerDTO.CreateCustomerDTO;
 import br.com.isato.applojalivros.DTO.telephoneDTO.TelephoneDTO;
+import br.com.isato.applojalivros.DTO.tradeCouponDTO.CreateTradeCouponDTO;
 import br.com.isato.applojalivros.DTO.tradeCouponDTO.TradeCouponDTO;
 import br.com.isato.applojalivros.model.Customer;
 import br.com.isato.applojalivros.model.TradeCoupon;
@@ -15,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,13 +57,25 @@ public class TradeCouponService {
         return tradeCouponsProjection.stream().map(TradeCouponDTO::new).toList();
     }
 
-    public Optional<TradeCoupon> create(@Valid TradeCoupon tradeCoupon){
+    public Optional<TradeCoupon> create(@Valid CreateTradeCouponDTO createTradeCouponDTO){
 
-        Optional<Customer> optCustomer = customerRepository.findById(tradeCoupon.getCustomer().getId());
+        Optional<Customer> optCustomer = customerRepository.findById(createTradeCouponDTO.getCustomerId());
 
         if(optCustomer.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Deve ser passado o id cliente válido (Long id)!", null);
+
+        if(createTradeCouponDTO.getValue().compareTo(BigDecimal.ZERO) < 0 || createTradeCouponDTO.getValue().compareTo(BigDecimal.ZERO) == 0)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Deve ser passado um valor maior que zero!", null);
+
+
+        TradeCoupon tradeCoupon = new TradeCoupon(createTradeCouponDTO);
+
+        tradeCoupon.setCreatedDate(LocalDate.now());
+        tradeCoupon.setActive(true);
+        tradeCoupon.setDescription("TROCA" + tradeCoupon.getValue().toString());
+
 
         return Optional.of(tradeCouponRepository.save(tradeCoupon));
     }
@@ -67,6 +83,8 @@ public class TradeCouponService {
     public Optional<TradeCoupon> update(@Valid TradeCoupon tradeCoupon){
         return Optional.of(tradeCouponRepository.save(tradeCoupon));
     }
+
+//    public Optional<TradeCoupon> updatePayment(@Valid )
 
     public Optional<TradeCoupon> changeActiveStatus(Long tradeCouponId){
 

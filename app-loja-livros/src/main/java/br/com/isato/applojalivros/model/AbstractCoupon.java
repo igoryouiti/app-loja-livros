@@ -21,11 +21,11 @@ public abstract class AbstractCoupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+
     private LocalDate createdDate;
     @NotNull
     private BigDecimal value;
-    @NotNull
+
     private Boolean active;
     @NotBlank
     @Column(columnDefinition = "TEXT")
