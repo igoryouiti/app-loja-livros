@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.model;
 
 import br.com.isato.applojalivros.projection.CategoryProjection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories")
     @JsonIgnoreProperties(value = "categories")
+    @JsonIgnore
     private Set<Book> books;
 
     public Category(CategoryProjection entity){

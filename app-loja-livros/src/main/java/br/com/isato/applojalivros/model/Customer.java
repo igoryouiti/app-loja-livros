@@ -3,6 +3,7 @@ package br.com.isato.applojalivros.model;
 import br.com.isato.applojalivros.DTO.customerDTO.CreateCustomerDTO;
 import br.com.isato.applojalivros.DTO.customerDTO.UpdateCustomerDTO;
 import br.com.isato.applojalivros.DTO.userDTO.UpdateUserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -50,35 +51,42 @@ public class Customer {
     @JsonIgnoreProperties(value = "customer")
     private User user;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "customer")
     @JsonIgnoreProperties(value = "customer")
     private Address address;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "customer")
     @JsonIgnoreProperties(value = "customer")
     private Telephone telephone;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "customer")
     private List<BillingAddress> billingAddresses;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "customer")
     private List<ShippingAddress> shippingAddresses;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "customer")
     private List<CreditCard> creditCards;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "customer")
     private List<TradeCoupon> tradeCoupons;
 
-
+    @JsonIgnore
     @OneToOne(mappedBy = "customer")
     @JsonIgnoreProperties(value = "customer")
     private Chart chart;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "customer")
     private List<Transaction> transactions;

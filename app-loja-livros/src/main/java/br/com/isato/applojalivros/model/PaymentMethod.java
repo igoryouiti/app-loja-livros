@@ -2,6 +2,7 @@ package br.com.isato.applojalivros.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class PaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private BigDecimal totalPrice;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,11 +35,11 @@ public class PaymentMethod {
     @JsonIgnoreProperties(value = "paymentMethod")
     private PromoCouponPayment promoCouponPayment;
 
-    @OneToMany (mappedBy = "paymentMethod", cascade = CascadeType.REMOVE)
+    @OneToMany (mappedBy = "paymentMethod", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "paymentMethod")
     private List<TradeCouponPayment> tradeCouponPayments;
 
-    @OneToMany (mappedBy = "paymentMethod", cascade = CascadeType.REMOVE)
+    @OneToMany (mappedBy = "paymentMethod", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "paymentMethod")
     private List<CreditCardPayment> creditCardPayments;
 

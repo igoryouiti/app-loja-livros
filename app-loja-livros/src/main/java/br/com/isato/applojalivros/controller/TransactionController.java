@@ -2,6 +2,7 @@ package br.com.isato.applojalivros.controller;
 
 import br.com.isato.applojalivros.DTO.addressDTO.AddressDTO;
 import br.com.isato.applojalivros.DTO.bookDTO.BookMinDTO;
+import br.com.isato.applojalivros.DTO.paymentMethodDTO.PaymentMethodDTO;
 import br.com.isato.applojalivros.DTO.transactionDTO.TransactionDTO;
 import br.com.isato.applojalivros.model.*;
 import br.com.isato.applojalivros.service.*;
@@ -116,7 +117,7 @@ public class TransactionController {
     }
 
     @GetMapping("/payment-method/{id}")
-    public ResponseEntity<PaymentMethod> getPaymentMethodById(@PathVariable Long id){
+    public ResponseEntity<PaymentMethodDTO> getPaymentMethodById(@PathVariable Long id){
         return paymentMethodService.findById(id)
                 .map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());

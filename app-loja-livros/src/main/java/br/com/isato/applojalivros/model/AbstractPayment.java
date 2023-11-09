@@ -23,6 +23,5 @@ public abstract class AbstractPayment {
     private BigDecimal value;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
     private PaymentStatus paymentStatus;
 }
