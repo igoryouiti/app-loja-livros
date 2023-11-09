@@ -52,6 +52,12 @@ public class PaymentMethodService {
     @Transactional(rollbackOn = Exception.class)
     public Optional<PaymentMethod> create(@Valid PaymentMethod paymentMethod){
 
+        if(paymentMethod.getCreditCardPayments() == null &&
+                paymentMethod.getPromoCouponPayment() == null &&
+                paymentMethod.getCreditCardPayments() == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Deve haver pelo menos um meio de pagamento válido", null);
+
         Optional<PaymentMethod> optPaymentMethod = Optional.of(paymentMethodRepository.save(paymentMethod));
         if(optPaymentMethod.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

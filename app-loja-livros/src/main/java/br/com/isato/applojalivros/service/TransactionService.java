@@ -72,41 +72,50 @@ public class TransactionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O id do usuário deve ser válido");
 
-        List<TransactionItem> transactionItems = transaction.getTransactionItems();
+        Optional<Transaction> optTransaction = Optional.of(transactionRepository.save(transaction));
 
-        List<Optional<TransactionItem>> items = new ArrayList<>();
-        transactionItems.forEach(item -> items.add(transactionItemService.create(item)));
 
-        items.forEach(item -> {
-            if(item.isEmpty())
+        if (optTransaction.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "Erro ao criar uma transação");
+
+
+        transaction.getTransactionItems().forEach(item -> {
+
+            item.setTransaction(optTransaction.get());
+            Optional<TransactionItem> optTransactionItem = transactionItemService.create(item);
+
+            if(optTransactionItem.isEmpty())
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         "Erro ao criar um transactionItem");
 
-            item.get().setItem(itemService.findById(item.get().getItem().getId()).get());
+        });
 
-            if(Optional.of(item.get().getItem()).isEmpty())
+        BigDecimal totalValue;
+
+        totalValue = transaction.getTransactionItems().stream().map(transactionItem -> {
+            Optional<Item> optItem = itemService.findById(transactionItem.getItem().getId());
+            if(optItem.isEmpty())
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        "Deve-se passar um id de item válido");
-        });
+                    "Item não achado");
 
+            System.out.println(optItem.get().toString());
 
+            return optItem.get().getSellPrice().multiply(BigDecimal.valueOf(transactionItem.getQuantity()));
+        }).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal totalPrice = BigDecimal.valueOf(0);
+        Optional<PaymentMethod> paymentMethod = paymentMethodService.create(transaction.getPaymentMethod());
+        if(paymentMethod.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Erro ao criar payment method");
 
-        transactionItems.forEach(item -> {
-            totalPrice.add(item.getItem().getSellPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
-        });
-
-//        transaction.getPaymentMethod().
-//
-//        PaymentMethod paymentMethod = paymentMethodService.create(transaction.getPaymentMethod()).get();
-
-        transaction.setTotalPrice(totalPrice);
+        transaction.setTotalPrice(totalValue);
         transaction.setTransactionStatus(TransactionStatus.EM_PROCESSAMENTO);
         transaction.setDateTime(LocalDateTime.now());
 
 
-        return Optional.of(transactionRepository.save(transaction));
+//        return Optional.of(transactionRepository.save(transaction));
+        return findById(optTransaction.get().getId());
     }
 
     public Optional<Transaction> update(@Valid Transaction transaction){
