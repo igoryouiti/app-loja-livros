@@ -29,6 +29,11 @@ public class PromoCouponPaymentService {
     }
 
     public Optional<PromoCouponPayment> create(@Valid PromoCouponPayment promoCouponPayment){
+
+        if(!promoCouponPayment.getPromoCoupon().getActive())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "O cupom de promocional deve estar ativo!", null);
+
         return Optional.of(promoCouponPaymentRepository.save(promoCouponPayment));
     }
 

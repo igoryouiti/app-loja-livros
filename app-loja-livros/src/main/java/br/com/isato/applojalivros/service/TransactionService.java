@@ -97,12 +97,13 @@ public class TransactionService {
             Optional<Item> optItem = itemService.findById(transactionItem.getItem().getId());
             if(optItem.isEmpty())
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Item não achado");
+                    "Item não encontrado");
 
-            System.out.println(optItem.get().toString());
 
             return optItem.get().getSellPrice().multiply(BigDecimal.valueOf(transactionItem.getQuantity()));
         }).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        transaction.getPaymentMethod().setTotalPrice(totalValue);
 
         Optional<PaymentMethod> paymentMethod = paymentMethodService.create(transaction.getPaymentMethod());
         if(paymentMethod.isEmpty())

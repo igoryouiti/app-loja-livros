@@ -68,6 +68,7 @@ public class PaymentMethodService {
 
             paymentMethod.getCreditCardPayments().forEach(creditCardPayment -> {
                 creditCardPayment.setPaymentMethod(optPaymentMethod.get());
+
                 Optional<CreditCardPayment> optCreditCardPayment = creditCardPaymentService.create(creditCardPayment);
                 if (optCreditCardPayment.isEmpty())
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

@@ -29,6 +29,11 @@ public class TradeCouponPaymentService {
     }
 
     public Optional<TradeCouponPayment> create(@Valid TradeCouponPayment tradeCouponPayment){
+
+        if(!tradeCouponPayment.getTradeCoupon().getActive())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "O cupom de troca deve estar ativo!", null);
+
         return Optional.of(tradeCouponPaymentRepository.save(tradeCouponPayment));
     }
 
