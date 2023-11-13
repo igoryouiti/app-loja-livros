@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.model;
 
 import br.com.isato.applojalivros.DTO.reasonActivationChangeDTO.ReasonActivationChangeUpdateDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +33,7 @@ public class ReasonActivationChange {
     @OneToOne
     @JoinColumn(name = "fk_book_id", referencedColumnName = "id")
     @JsonIgnoreProperties("reasonActivationChange")
+    @JsonIgnore
     private Book book;
 
     public ReasonActivationChange(ReasonActivationChangeUpdateDTO entity){

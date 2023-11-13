@@ -29,19 +29,21 @@ public class Transaction {
     private BigDecimal totalPrice;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
     private TransactionStatus transactionStatus;
 
     @ManyToOne
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties("transactions")
+    @NotNull
     private Customer customer;
 
     @OneToMany (mappedBy = "transaction", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "transaction")
-    private List<ChartItem> chartItems;
+    @NotNull
+    private List<TransactionItem> transactionItems;
 
     @OneToOne(mappedBy = "transaction")
     @JsonIgnoreProperties(value = "transaction")
+    @NotNull
     private PaymentMethod paymentMethod;
 }

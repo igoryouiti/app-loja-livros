@@ -1,5 +1,6 @@
 package br.com.isato.applojalivros.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -56,6 +57,7 @@ public class CreditCard {
 
     @OneToMany (mappedBy = "creditCard")
     @JsonIgnoreProperties(value = "creditCard")
+    @JsonIgnore
     private List<CreditCardPayment> creditCardPayments;
 
 }

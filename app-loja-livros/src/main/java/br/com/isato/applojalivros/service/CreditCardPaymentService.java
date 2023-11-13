@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.service;
 
 import br.com.isato.applojalivros.model.CreditCardPayment;
+import br.com.isato.applojalivros.model.PaymentStatus;
 import br.com.isato.applojalivros.repository.CreditCardPaymentRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class CreditCardPaymentService {
     }
 
     public Optional<CreditCardPayment> create(@Valid CreditCardPayment creditCardPayment){
+
+        creditCardPayment.setPaymentStatus(PaymentStatus.EM_PROCESSAMENTO);
+
+        // quando tiver sub-adquirente chamar aqui
+
         return Optional.of(creditCardPaymentRepository.save(creditCardPayment));
     }
 

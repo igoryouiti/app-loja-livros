@@ -21,7 +21,6 @@ public class Chart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToOne
     @JoinColumn(name = "fk_customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "chart")

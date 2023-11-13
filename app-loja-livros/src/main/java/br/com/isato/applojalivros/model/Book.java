@@ -1,6 +1,7 @@
 package br.com.isato.applojalivros.model;
 
 import br.com.isato.applojalivros.DTO.bookDTO.BookMinDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -62,14 +63,9 @@ public class Book {
     private String barCode;
 
     @NotNull
-    private Float rawPrice;
+    private BigDecimal rawPrice;
 
-    private Float sellPrice;
-
-//    @NotNull
-//    private BigDecimal rawPrice;
-//
-//    private BigDecimal sellPrice;
+    private BigDecimal sellPrice;
 
     @ManyToMany
     @JoinTable(
@@ -89,6 +85,7 @@ public class Book {
 
     @ManyToMany(mappedBy = "books")
     @JsonIgnoreProperties(value = "books")
+    @JsonIgnore
     private Set<Item> items;
 
     @Enumerated(EnumType.STRING)
@@ -103,4 +100,7 @@ public class Book {
         this.id = bookId;
     }
 
+    public Book(Book book) {
+        BeanUtils.copyProperties(book, this);
+    }
 }

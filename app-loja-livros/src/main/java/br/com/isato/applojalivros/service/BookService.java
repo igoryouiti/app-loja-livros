@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +79,8 @@ public class BookService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Erro na criação de dimensões do livro");
 
+        book.setSellPrice(book.getRawPrice().multiply(book.getPriceGroup().getValue()));
+        book.setSellPrice(book.getSellPrice().setScale(2, RoundingMode.CEILING));
 
         return optCreatedBook;
     }
